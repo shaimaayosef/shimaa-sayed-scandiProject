@@ -104,7 +104,7 @@ export default class Navbar extends Component {
           )}
           <div className="cart">
             <div className="badge">
-              <span>2</span>
+              <span>3</span>
             </div>
             <img src={cartSvg} alt="cart logo" className="cart-img" />
           </div>
