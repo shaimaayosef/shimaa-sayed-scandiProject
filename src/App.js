@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import ProductCart from "./componants/cart/ProductCart";
 // import CardContainer from "./componants/card/CardContainer";
 import Navbar from "./componants/navbar/Navbar";
-import ProductView from "./componants/product view/ProductView";
+// import ProductView from "./componants/product view/ProductView";
 
 class App extends Component {
   render() {
@@ -9,7 +10,8 @@ class App extends Component {
       <div>
         <Navbar />
         {/* <CardContainer /> */}
-        <ProductView />
+        {/* <ProductView /> */}
+        <ProductCart />
       </div>
     );
   }
