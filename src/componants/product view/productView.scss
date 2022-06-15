@@ -1,20 +1,16 @@
 .ProductView {
-  // border: steelblue solid 3px;
-
+  position: absolute;
   width: 1200px;
   height: 600px;
-
+  left: 110px;
+  top: 120px;
   display: flex;
   .product-images {
     display: flex;
     flex-direction: column;
-    // margin-left: -300px;
     img {
-      // position: absolute;
       width: 100px;
       height: 100px;
-      left: 100px;
-      top: 280px;
       margin-right: 60px;
       margin-bottom: 40px;
     }
@@ -27,7 +23,6 @@
     }
   }
   .product-info {
-    // border: seagreen solid 3px;
     width: 520px;
     height: 595px;
     h2 {
