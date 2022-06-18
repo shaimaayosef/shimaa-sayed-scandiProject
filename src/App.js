@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import ProductCart from "./componants/cart/ProductCart";
-// import CardContainer from "./componants/card/CardContainer";
+// import CartOverlay from "./componants/card overlay/CartOverlay";
+// import Cart from "./componants/cart/Cart";
+// import ProductCart from "./componants/cart/ProductCart";
+import CardContainer from "./componants/card/CardContainer";
 import Navbar from "./componants/navbar/Navbar";
 // import ProductView from "./componants/product view/ProductView";
 
@@ -9,9 +11,11 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        {/* <CardContainer /> */}
+        <CardContainer />
         {/* <ProductView /> */}
-        <ProductCart />
+        {/* <ProductCart /> */}
+        {/* <Cart /> */}
+        {/* <CartOverlay /> */}
       </div>
     );
   }

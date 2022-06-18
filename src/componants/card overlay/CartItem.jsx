@@ -1,17 +1,15 @@
-import "./cart.scss";
 import React, { Component } from "react";
-import PrevArrowSvg from "../../Group 1417.svg";
-import AfterArrowSvg from "../../Group 1418.svg";
-import MinusSvg from "../../minus-square.svg";
-import AddSvg from "../../plus-square.svg";
+import "./cartOverlay.scss";
+import MinusSvg from "../../minus-squ.svg";
+import AddSvg from "../../plus-squ.svg";
 
-export default class ProductCart extends Component {
+export default class CartItem extends Component {
   render() {
     return (
-      <div className="productCart">
+      <div className="cart-item">
         <div className="product-info">
           <h2>Apollo</h2>
-          <h3>Running Short</h3>
+          <h2>Running Short</h2>
           <div className="price">
             <span>$50.00</span>
           </div>
@@ -34,20 +32,16 @@ export default class ProductCart extends Component {
           </div>
         </div>
         <div className="product-count">
-          <div className="increse">
+          <div className="inc">
             <img src={AddSvg} alt="minus" />
           </div>
           <span>1</span>
-          <div className="decrese">
+          <div className="dec">
             <img src={MinusSvg} alt="plus" />
           </div>
         </div>
         <div className="pro-img">
           <img src="/Image.png" alt="product-img" className="product-img" />
-          <div className="changing-box">
-            <img src={PrevArrowSvg} alt="prev" className="prev" />
-            <img src={AfterArrowSvg} alt="after" className="after" />
-          </div>
         </div>
       </div>
     );
