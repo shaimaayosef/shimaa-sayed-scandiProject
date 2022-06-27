@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import CartOverlay from "./componants/card overlay/CartOverlay";
+// import CartOverlay from "./componants/cart overlay/CartOverlay";
 // import Cart from "./componants/cart/Cart";
 // import ProductCart from "./componants/cart/ProductCart";
 import CardContainer from "./componants/card/CardContainer";

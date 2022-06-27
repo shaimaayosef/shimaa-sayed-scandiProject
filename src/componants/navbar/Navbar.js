@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavStyle } from "./styles/Nav.styeld";
+import { NavStyle } from "./styles/Nav.styled";
 import cartSvg from "../../EmptyCart.svg";
 import logotSvg from "../../a-logo.svg";
 import arrow from "../../Vector.svg";
