@@ -6,6 +6,7 @@ import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 // import ProductCart from "./componants/cart/ProductCart";
 import CardContainer from "./componants/card/CardContainer";
 import Navbar from "./componants/navbar/Navbar";
+import CartOverlayPage from "./pages/CartOverlayPage";
 import CartPage from "./pages/CartPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import ProductList from "./pages/ProductList";
@@ -24,6 +25,9 @@ class App extends Component {
           </Route>
           <Route path="/discription">
             <ProductDescriptionPage />
+          </Route>
+          <Route path="/CartOverlayPage">
+            <CartOverlayPage />
           </Route>
         </Switch>
         {/* <Navbar />
