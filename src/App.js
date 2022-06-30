@@ -5,9 +5,28 @@ import CartOverlayPage from "./pages/CartOverlayPage";
 import CartPage from "./pages/CartPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import ProductList from "./pages/ProductList";
+import { gql } from "@apollo/client";
 
 class App extends Component {
   render() {
+    this.props.client
+      .query({
+        query: gql`
+          query Getcategories {
+            categories {
+              name
+              products {
+                name
+                gallery
+                prices {
+                  amount
+                }
+              }
+            }
+          }
+        `,
+      })
+      .then((result) => console.log(result));
     return (
       <div>
         <Navbar />

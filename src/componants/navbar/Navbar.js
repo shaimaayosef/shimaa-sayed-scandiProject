@@ -65,7 +65,9 @@ export default class Navbar extends Component {
               </li>
             ))}
           </ul>
-          <img src={logotSvg} alt="nav logo" className="nav-logo" />
+          <Link to="/">
+            <img src={logotSvg} alt="nav logo" className="nav-logo" />
+          </Link>
           <div className="cart-logo">
             <div className="dropdown">
               <p className="dropbtn">{this.state.currancy}</p>

@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-export const apolloClient = new ApolloClient({
+export const client = new ApolloClient({
   uri: "http://localhost:4000/",
   cache: new InMemoryCache(),
 });
@@ -13,9 +13,9 @@ export const apolloClient = new ApolloClient({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
       <BrowserRouter>
-        <App />
+        <App client={client} />
       </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>
