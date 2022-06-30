@@ -4,6 +4,7 @@ import cartSvg from "../../EmptyCart.svg";
 import logotSvg from "../../a-logo.svg";
 import arrow from "../../Vector.svg";
 import arrowUp from "../../Vectorup.svg";
+import { Link } from "react-router-dom";
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -73,8 +74,9 @@ export default class Navbar extends Component {
                   this.state.isOpen ? "" : "displayed"
                 }`}
               >
-                {this.currencies.map((x) => (
+                {this.currencies.map((x, i) => (
                   <option
+                    key={i}
                     value={x.symbol}
                     onClick={(e) =>
                       this.setState({
@@ -107,7 +109,9 @@ export default class Navbar extends Component {
               <div className="badge">
                 <span>3</span>
               </div>
-              <img src={cartSvg} alt="cart logo" className="cart-img" />
+              <Link to="/cart">
+                <img src={cartSvg} alt="cart logo" className="cart-img" />
+              </Link>
             </div>
           </div>
         </nav>
