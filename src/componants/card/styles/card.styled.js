@@ -23,6 +23,7 @@ export const CardStyel = styled.div`
         font-weight: 400;
         font-size: 42px;
         line-height: 160%;
+        text-transform: uppercase;
       }
     }
     .cardsDiv {

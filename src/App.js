@@ -4,9 +4,10 @@ import Navbar from "./componants/navbar/Navbar";
 import CartOverlayPage from "./pages/CartOverlayPage";
 import CartPage from "./pages/CartPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
-import ProductList from "./pages/ProductList";
+import All from "./pages/All";
 import { gql } from "@apollo/client";
-
+import { connect } from "react-redux";
+import { getCategories } from "./store/categoriesSlice";
 class App extends Component {
   render() {
     this.props.client
@@ -20,18 +21,23 @@ class App extends Component {
                 gallery
                 prices {
                   amount
+                  currency {
+                    label
+                    symbol
+                  }
                 }
               }
             }
           }
         `,
       })
-      .then((result) => console.log(result));
+      .then((result) => this.props.getCategories(result.data.categories));
+    console.log(this.props.categories);
     return (
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<ProductList />} />
+          <Route path="/" element={<All />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/discription" element={<ProductDescriptionPage />} />
           <Route path="/CartOverlayPage" element={<CartOverlayPage />} />
@@ -41,4 +47,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  categories: state.categories,
+});
+
+const mapDispatchToProps = { getCategories };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
