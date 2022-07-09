@@ -5,40 +5,19 @@ import logotSvg from "../../a-logo.svg";
 import arrow from "../../Vector.svg";
 import arrowUp from "../../Vectorup.svg";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { ubdateCurrency } from "../../store/currencySlice";
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeItem: -1,
-      items: ["all", "clothes", "teck"],
       isOpen: true,
-      currancy: "$",
     };
   }
-  currencies = [
-    {
-      label: "USD",
-      symbol: "$",
-    },
-    {
-      label: "GBP",
-      symbol: "£",
-    },
-    {
-      label: "AUD",
-      symbol: "A$",
-    },
-    {
-      label: "JPY",
-      symbol: "¥",
-    },
-    {
-      label: "RUB",
-      symbol: "₽",
-    },
-  ];
-  openCurrancyList() {
+
+  openCurrencyList() {
     this.setState((prevState) => ({
       isOpen: !prevState.isOpen,
     }));
@@ -50,46 +29,49 @@ export default class Navbar extends Component {
   }
 
   render() {
-    console.log(this.state.currancy);
     return (
       <NavStyle>
         <nav>
           <ul className="catogeries">
-            {this.state.items.map((item, index) => (
-              <li
-                key={index}
-                className={this.state.activeItem === index ? "active" : ""}
-                onClick={this.handleItemClick.bind(this, index)}
-              >
-                <p>{item}</p>
-              </li>
-            ))}
+            {this.props.categories.length > 0 &&
+              this.props.categories.map((item, index) => (
+                <li
+                  key={index}
+                  className={this.state.activeItem === index ? "active" : ""}
+                  onClick={this.handleItemClick.bind(this, index)}
+                >
+                  <Link to={"/" + item.name} className="nav-links">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
           </ul>
           <Link to="/">
             <img src={logotSvg} alt="nav logo" className="nav-logo" />
           </Link>
           <div className="cart-logo">
             <div className="dropdown">
-              <p className="dropbtn">{this.state.currancy}</p>
+              <p className="dropbtn">
+                {this.props.selectedCurrency.symbol || "$"}
+              </p>
               <div
                 className={`dropdown-content ${
                   this.state.isOpen ? "" : "displayed"
                 }`}
               >
-                {this.currencies.map((x, i) => (
-                  <option
-                    key={i}
-                    value={x.symbol}
-                    onClick={(e) =>
-                      this.setState({
-                        currancy: e.target.value,
-                      })
-                    }
-                    className="options"
-                  >
-                    {x.symbol} {x.label}
-                  </option>
-                ))}
+                {this.props.currency.length > 0 &&
+                  this.props.currency.map((x, i) => (
+                    <option
+                      key={i}
+                      value={i}
+                      onClick={(e) => {
+                        this.props.ubdateCurrency({ i });
+                      }}
+                      className="options"
+                    >
+                      {x.symbol} {x.label}
+                    </option>
+                  ))}
               </div>
             </div>
             {this.state.isOpen ? (
@@ -97,21 +79,21 @@ export default class Navbar extends Component {
                 src={arrow}
                 alt="arrow"
                 className="arrow"
-                onClick={() => this.openCurrancyList()}
+                onClick={() => this.openCurrencyList()}
               />
             ) : (
               <img
                 src={arrowUp}
                 alt="arrow"
                 className="arrow"
-                onClick={() => this.openCurrancyList()}
+                onClick={() => this.openCurrencyList()}
               />
             )}
             <div className="cart">
               <div className="badge">
                 <span>3</span>
               </div>
-              <Link to="/cart">
+              <Link to="/CartOverlayPage">
                 <img src={cartSvg} alt="cart logo" className="cart-img" />
               </Link>
             </div>
@@ -121,3 +103,12 @@ export default class Navbar extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  currency: state.currency.currency,
+  selectedCurrency: state.currency.selectedCurrency,
+  categories: state.categories,
+});
+
+const mapDispatchToProps = { ubdateCurrency };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

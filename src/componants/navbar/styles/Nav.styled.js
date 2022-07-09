@@ -24,11 +24,11 @@ export const NavStyle = styled.div`
         cursor: pointer;
         &.active {
           border-bottom: solid 3px #5ece7b;
-          p {
+          .nav-links {
             color: #5ece7b;
           }
         }
-        p {
+        .nav-links {
           text-decoration: none;
           font-family: "Raleway";
           font-style: normal;

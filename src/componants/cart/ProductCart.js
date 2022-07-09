@@ -4,6 +4,7 @@ import PrevArrowSvg from "../../Group 1417.svg";
 import AfterArrowSvg from "../../Group 1418.svg";
 import MinusSvg from "../../minus-square.svg";
 import AddSvg from "../../plus-square.svg";
+import { Link } from "react-router-dom";
 
 export default class ProductCart extends Component {
   render() {
@@ -44,7 +45,9 @@ export default class ProductCart extends Component {
             </div>
           </div>
           <div className="pro-img">
-            <img src="/Image.png" alt="product-img" className="product-img" />
+            <Link to="/discription">
+              <img src="/Image.png" alt="product-img" className="product-img" />
+            </Link>
             <div className="changing-box">
               <img src={PrevArrowSvg} alt="prev" className="prev" />
               <img src={AfterArrowSvg} alt="after" className="after" />

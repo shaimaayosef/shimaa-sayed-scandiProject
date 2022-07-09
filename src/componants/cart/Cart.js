@@ -10,7 +10,6 @@ export default class Cart extends Component {
           <h1>Cart</h1>
           <ProductCart />
           <ProductCart />
-
           <div className="order">
             <p>
               Tax 21%: <span>$42.00</span>
@@ -22,6 +21,7 @@ export default class Cart extends Component {
               Total: <span>$200.00</span>
             </p>
             <button className="order-ptn">order</button>
+            <div></div>
           </div>
         </div>
       </CartStyle>

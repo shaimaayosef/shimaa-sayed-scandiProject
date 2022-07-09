@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import Navbar from "./componants/navbar/Navbar";
 import CartOverlayPage from "./pages/CartOverlayPage";
 import CartPage from "./pages/CartPage";
@@ -8,6 +8,9 @@ import All from "./pages/All";
 import { gql } from "@apollo/client";
 import { connect } from "react-redux";
 import { getCategories } from "./store/categoriesSlice";
+import { getCurrency } from "./store/currencySlice";
+import Clothes from "./pages/Clothes";
+import Tech from "./pages/Tech";
 class App extends Component {
   render() {
     this.props.client
@@ -17,31 +20,72 @@ class App extends Component {
             categories {
               name
               products {
+                id
                 name
+                inStock
                 gallery
+                description
+                category
+                attributes {
+                  id
+                  name
+                  type
+                  items {
+                    displayValue
+                    value
+                    id
+                  }
+                }
                 prices {
-                  amount
                   currency {
                     label
                     symbol
                   }
+                  amount
                 }
+                brand
               }
             }
           }
         `,
       })
       .then((result) => this.props.getCategories(result.data.categories));
-    console.log(this.props.categories);
+    this.props.client
+      .query({
+        query: gql`
+          query currencies {
+            currencies {
+              label
+              symbol
+            }
+          }
+        `,
+      })
+      .then((result) => this.props.getCurrency(result.data.currencies));
+
+    const Wrapper = (props) => {
+      const params = useParams();
+      return <ProductDescriptionPage {...{ ...props, match: { params } }} />;
+    };
+
     return (
       <div>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<All />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/discription" element={<ProductDescriptionPage />} />
-          <Route path="/CartOverlayPage" element={<CartOverlayPage />} />
-        </Routes>
+        <div>
+          {this.props.categories.length > 0 ? (
+            <Routes>
+              <Route path="/" element={<All />} />
+              <Route path="/clothes" element={<Clothes />} />
+              <Route path="/tech" element={<Tech />} />
+              <Route path="/all" element={<All />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/description/:id" element={<Wrapper />} />
+              <Route path="/CartOverlayPage" element={<CartOverlayPage />} />
+            </Routes>
+          ) : (
+            <p>loading...</p>
+          )}
+        </div>
       </div>
     );
   }
@@ -49,8 +93,9 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   categories: state.categories,
+  currency: state.currency.currency,
 });
 
-const mapDispatchToProps = { getCategories };
+const mapDispatchToProps = { getCategories, getCurrency };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

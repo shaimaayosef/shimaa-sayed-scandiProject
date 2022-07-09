@@ -1,15 +1,7 @@
 import { ProductViewStyle } from "./styles/ProductView.styled";
 import React, { Component } from "react";
-// import ProCartSvg from "../../Empty Cart.svg";
 
 export default class ProductView extends Component {
-  // onClick = () => {
-  //   console.log("this is a function");
-  // };
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { date: new Date() };
-  // }
   render() {
     return (
       <ProductViewStyle>

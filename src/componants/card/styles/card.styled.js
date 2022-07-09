@@ -45,6 +45,7 @@ export const CardStyel = styled.div`
     height: 444px;
     left: calc(50% - 386px / 2 - 427px);
     bottom: 738px;
+    cursor: pointer;
     .product-img {
       width: 383px;
       height: 330px;
