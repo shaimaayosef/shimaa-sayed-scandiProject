@@ -16,10 +16,8 @@ export default class ProductView extends Component {
   }
   render() {
     console.log(this.props.product);
-    const reg = /<p>/;
-    const description = this.props.product.description.replace(reg, "");
-    const reg1 = /<\/p>/;
-    const newDescription = description.replace(reg1, "");
+    const description = this.props.product.description;
+    console.log(description);
     return (
       <ProductViewStyle>
         <div className="ProductView">
@@ -90,7 +88,10 @@ export default class ProductView extends Component {
             </div>
 
             <button className="add">add to card</button>
-            <p className="descreption">{newDescription}</p>
+            <p
+              className="descreption"
+              dangerouslySetInnerHTML={{ __html: description }}
+            ></p>
           </div>
         </div>
       </ProductViewStyle>
