@@ -17,7 +17,6 @@ export default class ProductView extends Component {
   render() {
     console.log(this.props.product);
     const description = this.props.product.description;
-    console.log(description);
     return (
       <ProductViewStyle>
         <div className="ProductView">
@@ -90,6 +89,7 @@ export default class ProductView extends Component {
             <button className="add">add to card</button>
             <p
               className="descreption"
+              //This angerouslySetInnerHTML is dangerous, but since we do not take from users, but rather from the back-end, it will not be dangerous because the back-end is reliable.
               dangerouslySetInnerHTML={{ __html: description }}
             ></p>
           </div>
