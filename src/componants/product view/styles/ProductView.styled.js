@@ -16,6 +16,7 @@ export const ProductViewStyle = styled.div`
         height: 100px;
         margin-right: 60px;
         margin-bottom: 40px;
+        cursor: pointer;
       }
     }
     .Photo-Gallery {
@@ -66,6 +67,7 @@ export const ProductViewStyle = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
           }
         }
       }
@@ -89,8 +91,8 @@ export const ProductViewStyle = styled.div`
             border: #1d1f22 solid 1px;
             width: 32px;
             height: 32px;
-            background-color: rgba(15, 100, 80, 1);
             margin: 2px;
+            cursor: pointer;
           }
         }
       }

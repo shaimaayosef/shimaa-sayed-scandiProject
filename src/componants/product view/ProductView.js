@@ -2,49 +2,95 @@ import { ProductViewStyle } from "./styles/ProductView.styled";
 import React, { Component } from "react";
 
 export default class ProductView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      src: this.props.product.gallery[0],
+    };
+  }
+
+  changeImg(src) {
+    this.setState((prevState) => ({
+      src: src,
+    }));
+  }
   render() {
+    console.log(this.props.product);
+    const reg = /<p>/;
+    const description = this.props.product.description.replace(reg, "");
+    const reg1 = /<\/p>/;
+    const newDescription = description.replace(reg1, "");
     return (
       <ProductViewStyle>
         <div className="ProductView">
           <div className="product-images">
-            <img src="/Image.png" alt="img1" />
-            <img src="/Image.png" alt="img1" />
-            <img src="/Image.png" alt="img1" />
+            {this.props.product.gallery.map((picture) => (
+              <img
+                src={picture}
+                alt={this.props.product.name}
+                key={this.props.product.id}
+                onClick={this.changeImg.bind(this, picture)}
+              />
+            ))}
           </div>
           <div className="Photo-Gallery">
-            <img src="/Image.png" alt="img1" />
+            <img src={this.state.src} alt={this.props.product.name} />
           </div>
           <div className="product-info">
-            <h2>Apollo</h2>
-            <h3>Running Short</h3>
-            <div className="size">
-              <h4>size:</h4>
-              <div className="size-box">
-                <div className="size-x">xs</div>
-                <div className="size-x">m</div>
-                <div className="size-x">l</div>
-                <div className="size-x">xl</div>
-              </div>
-            </div>
-            <div className="color">
-              <h4>color:</h4>
-              <div className="color-box">
-                <div className="color-x"></div>
-                <div className="color-x"></div>
-                <div className="color-x"></div>
-              </div>
-            </div>
+            <h2>{this.props.product.brand}</h2>
+            <h3>{this.props.product.name}</h3>
+            {this.props.product.attributes
+              .filter((a) => a.id === "Size")
+              .map((d) => (
+                <div className="size">
+                  <h4>Size:</h4>
+                  <div className="size-box">
+                    {d.items.map((size) => (
+                      <div className="size-x">{size.value}</div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            {this.props.product.attributes
+              .filter((a) => a.id === "Capacity")
+              .map((d) => (
+                <div className="size">
+                  <h4>Capacity:</h4>
+                  <div className="size-box">
+                    {d.items.map((capacity) => (
+                      <div className="size-x">{capacity.value}</div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            {this.props.product.attributes
+              .filter((a) => a.id === "Color")
+              .map((d) => (
+                <div className="color">
+                  <h4>Color:</h4>
+                  <div className="color-box">
+                    {d.items.map((color) => (
+                      <div
+                        className="color-x"
+                        style={{ backgroundColor: `${color.value}` }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             <div className="price">
               <h4 className="price">price:</h4>
-              <span>$50.00</span>
+              <span>
+                {
+                  this.props.product.prices[this.props.selectedCurrency]
+                    .currency.symbol
+                }
+                {this.props.product.prices[this.props.selectedCurrency].amount}
+              </span>
             </div>
 
             <button className="add">add to card</button>
-            <p className="descreption">
-              Find stunning women's cocktail dresses and party dresses. Stand
-              out in lace and metallic cocktail dresses and party dresses from
-              all your favorite brands.
-            </p>
+            <p className="descreption">{newDescription}</p>
           </div>
         </div>
       </ProductViewStyle>
