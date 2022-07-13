@@ -21,11 +21,11 @@ export default class ProductView extends Component {
       <ProductViewStyle>
         <div className="ProductView">
           <div className="product-images">
-            {this.props.product.gallery.map((picture) => (
+            {this.props.product.gallery.map((picture, i) => (
               <img
                 src={picture}
                 alt={this.props.product.name}
-                key={this.props.product.id}
+                key={i}
                 onClick={this.changeImg.bind(this, picture)}
               />
             ))}
@@ -38,36 +38,41 @@ export default class ProductView extends Component {
             <h3>{this.props.product.name}</h3>
             {this.props.product.attributes
               .filter((a) => a.id === "Size")
-              .map((d) => (
-                <div className="size">
+              .map((d, i) => (
+                <div className="size" key={i}>
                   <h4>Size:</h4>
                   <div className="size-box">
-                    {d.items.map((size) => (
-                      <div className="size-x">{size.value}</div>
+                    {d.items.map((size, i) => (
+                      <div className="size-x" key={i}>
+                        {size.value}
+                      </div>
                     ))}
                   </div>
                 </div>
               ))}
             {this.props.product.attributes
               .filter((a) => a.id === "Capacity")
-              .map((d) => (
-                <div className="size">
+              .map((d, i) => (
+                <div className="size" key={i}>
                   <h4>Capacity:</h4>
                   <div className="size-box">
-                    {d.items.map((capacity) => (
-                      <div className="size-x">{capacity.value}</div>
+                    {d.items.map((capacity, i) => (
+                      <div key={i} className="size-x">
+                        {capacity.value}
+                      </div>
                     ))}
                   </div>
                 </div>
               ))}
             {this.props.product.attributes
               .filter((a) => a.id === "Color")
-              .map((d) => (
-                <div className="color">
+              .map((d, i) => (
+                <div className="color" key={i}>
                   <h4>Color:</h4>
                   <div className="color-box">
-                    {d.items.map((color) => (
+                    {d.items.map((color, i) => (
                       <div
+                        key={i}
                         className="color-x"
                         style={{ backgroundColor: `${color.value}` }}
                       ></div>
