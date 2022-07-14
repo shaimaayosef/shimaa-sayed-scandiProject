@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { CardOverlayStyel } from "./styles/cardOverlay.styled";
+import { CartItemStyel } from "./styles/cartOverlay.styled";
 import MinusSvg from "../../minus-squ.svg";
 import AddSvg from "../../plus-squ.svg";
 
 export default class CartItem extends Component {
   render() {
     return (
-      <CardOverlayStyel>
+      <CartItemStyel>
         <div className="cart-item">
           <div className="product-info">
             <h2>Apollo</h2>
@@ -45,7 +45,7 @@ export default class CartItem extends Component {
             <img src="/Image.png" alt="product-img" className="product-img" />
           </div>
         </div>
-      </CardOverlayStyel>
+      </CartItemStyel>
     );
   }
 }

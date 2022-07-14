@@ -5,6 +5,7 @@ export const CardStyel = styled.div`
     margin-top: 10px;
     position: absolute;
     width: 100%;
+    height: 100%;
     left: 0px;
     top: 80px;
     background: #ffffff;

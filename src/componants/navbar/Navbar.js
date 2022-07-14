@@ -93,9 +93,12 @@ class Navbar extends Component {
               <div className="badge">
                 <span>3</span>
               </div>
-              <Link to="/CartOverlayPage">
-                <img src={cartSvg} alt="cart logo" className="cart-img" />
-              </Link>
+              <img
+                src={cartSvg}
+                alt="cart logo"
+                className="cart-img"
+                onClick={this.props.handleModal}
+              />
             </div>
           </div>
         </nav>

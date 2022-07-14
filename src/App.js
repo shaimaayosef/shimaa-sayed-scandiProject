@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 import Navbar from "./componants/navbar/Navbar";
-import CartOverlayPage from "./pages/CartOverlayPage";
+import CartOverlay from "./pages/CartOverlayPage";
 import CartPage from "./pages/CartPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import All from "./pages/All";
@@ -12,6 +12,17 @@ import { getCurrency } from "./store/currencySlice";
 import Clothes from "./pages/Clothes";
 import Tech from "./pages/Tech";
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+    };
+  }
+  handleModal() {
+    this.setState((prev) => ({
+      modal: !prev.modal,
+    }));
+  }
   render() {
     this.props.client
       .query({
@@ -70,7 +81,10 @@ class App extends Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar handleModal={() => this.handleModal()} />
+        {this.state.modal && (
+          <CartOverlay handleModal={() => this.handleModal()} />
+        )}
         <div>
           {this.props.categories.length > 0 ? (
             <Routes>
@@ -80,7 +94,6 @@ class App extends Component {
               <Route path="/all" element={<All />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/description/:id" element={<Wrapper />} />
-              <Route path="/CartOverlayPage" element={<CartOverlayPage />} />
             </Routes>
           ) : (
             <p>loading...</p>

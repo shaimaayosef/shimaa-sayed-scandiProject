@@ -1,6 +1,75 @@
 import styled from "styled-components";
 
-export const CardOverlayStyel = styled.div`
+export const CartOverlayStyel = styled.div`
+  z-index: 10;
+  position: absolute;
+  left: 30px;
+  top: 65px;
+
+  .cart-overlay {
+    position: absolute;
+    width: 325px;
+    height: 610px;
+    left: 1043px;
+    top: 10px;
+    background: #ffffff;
+    padding: 10px;
+    h3 {
+      font-weight: 700;
+      font-size: 16px;
+      span {
+        font-weight: 500;
+      }
+    }
+    p {
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .ptn {
+      display: flex;
+
+      .view-ptn {
+        font-family: "Raleway";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        width: 140px;
+        height: 43px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        text-transform: uppercase;
+        background: #ffffff;
+        color: #0c0c0c;
+        margin: 8px;
+        //   margin-top: 12px;
+        cursor: pointer;
+      }
+      .check-ptn {
+        font-family: "Raleway";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        width: 140px;
+        height: 43px;
+        background: #5ece7b;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        text-transform: uppercase;
+        color: #ffffff;
+        border: none;
+        margin: 8px;
+        //   margin-top: 12px;
+        cursor: pointer;
+      }
+    }
+  }
+`;
+export const CartItemStyel = styled.div`
   .cart-item {
     //   border-bottom: #e5e5e5 solid 1px;
     //   border-top: #e5e5e5 solid 1px;
@@ -120,76 +189,6 @@ export const CardOverlayStyel = styled.div`
       .product-img {
         width: 121px;
         height: 190px;
-      }
-    }
-  }
-  .overlay {
-    position: absolute;
-    width: 1440px;
-    height: 1435px;
-    left: 30px;
-    top: 65px;
-    background: rgba(57, 55, 72, 0.22);
-    .cart-overlay {
-      position: absolute;
-      width: 325px;
-      height: 610px;
-      left: 1043px;
-      top: 10px;
-      background: #ffffff;
-      padding: 10px;
-      h3 {
-        font-weight: 700;
-        font-size: 16px;
-        span {
-          font-weight: 500;
-        }
-      }
-      p {
-        font-weight: 700;
-        font-size: 16px;
-      }
-      .ptn {
-        display: flex;
-
-        .view-ptn {
-          font-family: "Raleway";
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 2px;
-          width: 140px;
-          height: 43px;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          text-transform: uppercase;
-          background: #ffffff;
-          color: #0c0c0c;
-          margin: 8px;
-          //   margin-top: 12px;
-          cursor: pointer;
-        }
-        .check-ptn {
-          font-family: "Raleway";
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 2px;
-          width: 140px;
-          height: 43px;
-          background: #5ece7b;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 120%;
-          text-transform: uppercase;
-          color: #ffffff;
-          border: none;
-          margin: 8px;
-          //   margin-top: 12px;
-          cursor: pointer;
-        }
       }
     }
   }
