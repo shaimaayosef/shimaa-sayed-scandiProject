@@ -9,14 +9,17 @@ class ProductView extends Component {
     this.state = {
       src: this.props.product.gallery[0],
       selectedAttributes: {},
+      selectedColor: 0,
+      selectedSize: 0,
+      selectedCapasity: 0,
     };
   }
-  selectAttributes(value, attribute) {
+  selectAttributes(name, index) {
     this.setState((prevState) => ({
       ...prevState,
       selectedAttributes: {
         ...prevState.selectedAttributes,
-        [attribute]: value,
+        [name]: index,
       },
     }));
   }
@@ -30,19 +33,13 @@ class ProductView extends Component {
     const isExist = this.props.cartItems.filter(
       (item) => item.id === this.props.product.id
     )[0];
-    // const updatedProduct = Object.keys(this.state.selectedAttributes).map(
-    //   (key) => ({
-    //     ...this.props.product,
-    //     [key]: this.state.selectedAttributes.key,
-    //   })
-    // );
-    // console.log(updatedProduct);
     isExist
       ? this.props.updateCart(this.props.product)
       : this.props.addToCart(this.props.product);
   }
   render() {
     const description = this.props.product.description;
+    console.log(this.props.cartItems);
     return (
       <ProductViewStyle>
         <div className="ProductView">
@@ -70,9 +67,17 @@ class ProductView extends Component {
                   <div className="size-box">
                     {d.items.map((size, i) => (
                       <div
-                        className="size-x"
                         key={i}
-                        onClick={() => this.selectAttributes(size.value, d.id)}
+                        className={`size-x ${
+                          this.state.selectedSize === i ? "selected" : ""
+                        }`}
+                        onClick={() => {
+                          this.setState((prevState) => ({
+                            ...prevState,
+                            selectedSize: i,
+                          }));
+                          this.selectAttributes(d.id, i);
+                        }}
                       >
                         {size.value}
                       </div>
@@ -89,10 +94,16 @@ class ProductView extends Component {
                     {d.items.map((capacity, i) => (
                       <div
                         key={i}
-                        className="size-x"
-                        onClick={() =>
-                          this.selectAttributes(capacity.value, d.id)
-                        }
+                        className={`size-x ${
+                          this.state.selectedCapasity === i ? "selected" : ""
+                        }`}
+                        onClick={() => {
+                          this.setState((prevState) => ({
+                            ...prevState,
+                            selectedCapasity: i,
+                          }));
+                          this.selectAttributes(d.id, i);
+                        }}
                       >
                         {capacity.value}
                       </div>
@@ -109,9 +120,17 @@ class ProductView extends Component {
                     {d.items.map((color, i) => (
                       <div
                         key={i}
-                        className="color-x"
+                        className={`color-x ${
+                          this.state.selectedColor === i ? "selected" : ""
+                        }`}
                         style={{ backgroundColor: `${color.value}` }}
-                        onClick={() => this.selectAttributes(color.value, d.id)}
+                        onClick={() => {
+                          this.setState((prevState) => ({
+                            ...prevState,
+                            selectedColor: i,
+                          }));
+                          this.selectAttributes(d.id, i);
+                        }}
                       ></div>
                     ))}
                   </div>

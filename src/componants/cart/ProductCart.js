@@ -37,7 +37,6 @@ class ProductCart extends Component {
       : this.props.removeFromCart(this.props.item);
   }
   render() {
-    console.log(this.state.index);
     return (
       <CartStyle>
         <div className="productCart">

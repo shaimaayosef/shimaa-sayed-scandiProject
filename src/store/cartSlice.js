@@ -13,7 +13,10 @@ export const cartSlice = createSlice({
       state.showCart = action.payload;
     },
     addToCart: (state, action) => {
-      state.cartItems.push({ ...action.payload, qty: 1 });
+      state.cartItems.push({
+        ...action.payload,
+        qty: 1,
+      });
     },
     updateCart: (state, action) => {
       const { id } = action.payload;

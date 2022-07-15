@@ -69,10 +69,13 @@ export const ProductViewStyle = styled.div`
             justify-content: center;
             cursor: pointer;
           }
+          .selected {
+            background-color: #1d1f22;
+            color: #ffffff;
+          }
         }
       }
       .color {
-        // border: #1d1f22 solid 1px;
         display: flex;
         flex-direction: column;
         margin-top: 10px;
@@ -84,7 +87,6 @@ export const ProductViewStyle = styled.div`
           margin-top: -5px;
         }
         .color-box {
-          // border: #1d1f22 solid 1px;
           display: flex;
           margin-top: -15px;
           .color-x {
@@ -93,6 +95,9 @@ export const ProductViewStyle = styled.div`
             height: 32px;
             margin: 2px;
             cursor: pointer;
+          }
+          .selected {
+            border: #5ece7b solid 3px;
           }
         }
       }

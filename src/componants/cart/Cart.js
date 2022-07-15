@@ -23,7 +23,24 @@ class Cart extends Component {
           )}
           <div className="order">
             <p>
-              Tax 21%: <span>$42.00</span>
+              Tax 21%:
+              <span>
+                {(this.props.currency.length > 0 &&
+                  this.props.currency[this.props.selectedCurrency.i].symbol) ||
+                  "$"}
+                {this.props.cartItems.length > 0 &&
+                  this.props.cartItems
+                    .reduce(
+                      (acc, item) =>
+                        acc +
+                        (item.prices[this.props.selectedCurrency.i].amount *
+                          item.qty *
+                          21) /
+                          100,
+                      0
+                    )
+                    .toFixed(2)}
+              </span>
             </p>
             <p>
               Quantity:
