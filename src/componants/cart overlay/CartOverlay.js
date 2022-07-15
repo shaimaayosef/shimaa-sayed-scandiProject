@@ -16,7 +16,11 @@ class CartOverlay extends Component {
         <CartOverlayStyel>
           <div className="cart-overlay">
             <h3>
-              My Bag, <span>3 items</span>
+              My Bag,
+              <span>
+                {this.props.cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                items
+              </span>
             </h3>
             {this.props.cartItems.length > 0 ? (
               this.props.cartItems.map((item, i) => (
@@ -34,7 +38,19 @@ class CartOverlay extends Component {
               Total &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              $200.00
+              {(this.props.currency.length > 0 &&
+                this.props.currency[this.props.selectedCurrency.i].symbol) ||
+                "$"}
+              {this.props.cartItems.length > 0 &&
+                this.props.cartItems
+                  .reduce(
+                    (acc, item) =>
+                      acc +
+                      item.prices[this.props.selectedCurrency.i].amount *
+                        item.qty,
+                    0
+                  )
+                  .toFixed(2)}
             </p>
             <div className="ptn">
               <Link

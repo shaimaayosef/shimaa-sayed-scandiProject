@@ -12,7 +12,6 @@ class CartItem extends Component {
       : this.props.removeFromCart(this.props.item);
   }
   render() {
-    console.log(this.props.item);
     return (
       <CartItemStyel>
         <div className="cart-item">

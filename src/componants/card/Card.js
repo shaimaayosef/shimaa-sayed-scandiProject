@@ -15,14 +15,13 @@ class Card extends Component {
       : this.props.addToCart(this.props.product);
   }
   render() {
-    console.log(this.props.cartItems);
     return (
       <CardStyel>
         <div className="pro-card">
           <Link to={`/description/${this.props.product.id}`}>
             <img
               src={this.props.product.gallery[0]}
-              alt="product-pic"
+              alt={this.props.product.id}
               className="product-img"
             />
           </Link>

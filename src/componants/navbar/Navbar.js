@@ -53,7 +53,9 @@ class Navbar extends Component {
           <div className="cart-logo">
             <div className="dropdown">
               <p className="dropbtn">
-                {this.props.selectedCurrency.symbol || "$"}
+                {(this.props.currency.length > 0 &&
+                  this.props.currency[this.props.selectedCurrency.i].symbol) ||
+                  "$"}
               </p>
               <div
                 className={`dropdown-content ${
@@ -65,8 +67,9 @@ class Navbar extends Component {
                     <option
                       key={i}
                       value={i}
-                      onClick={(e) => {
+                      onClick={() => {
                         this.props.ubdateCurrency({ i });
+                        this.openCurrencyList();
                       }}
                       className="options"
                     >

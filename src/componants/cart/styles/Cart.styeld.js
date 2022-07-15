@@ -41,52 +41,57 @@ export const CartStyle = styled.div`
           color: #1d1f22;
         }
       }
-      .size {
+      .attributes {
         display: flex;
         flex-direction: column;
-        margin-top: -8px;
-        h4 {
-          font-style: normal;
-          font-weight: 700;
-          font-size: 18px;
-          color: #1d1f22;
-        }
-        .size-box {
+        width: 300px;
+        .size {
           display: flex;
-          margin-top: -20px;
-          .size-x {
-            border: 1px solid #1d1f22;
-            width: 63px;
-            height: 45px;
-            margin: 2px;
+          flex-direction: column;
+          margin-top: -8px;
+          h4 {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            color: #1d1f22;
+          }
+          .size-box {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            margin-top: -20px;
+            .size-x {
+              border: 1px solid #1d1f22;
+              width: 63px;
+              height: 45px;
+              margin: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+            }
           }
         }
-      }
-      .color {
-        display: flex;
-        flex-direction: column;
-        margin-top: -8px;
-
-        h4 {
-          font-style: normal;
-          font-weight: 700;
-          font-size: 18px;
-          color: #1d1f22;
-        }
-        .color-box {
+        .color {
           display: flex;
-          margin-top: -20px;
-          .color-x {
-            border: #1d1f22 solid 1px;
-            width: 32px;
-            height: 32px;
-            background-color: rgba(15, 100, 80, 1);
-            margin: 2px;
-            cursor: pointer;
+          flex-direction: column;
+          margin-top: -8px;
+
+          h4 {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            color: #1d1f22;
+          }
+          .color-box {
+            display: flex;
+            margin-top: -20px;
+            .color-x {
+              border: #1d1f22 solid 1px;
+              width: 32px;
+              height: 32px;
+              background-color: rgba(15, 100, 80, 1);
+              margin: 2px;
+              cursor: pointer;
+            }
           }
         }
       }

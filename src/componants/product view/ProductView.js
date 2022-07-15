@@ -42,8 +42,6 @@ class ProductView extends Component {
       : this.props.addToCart(this.props.product);
   }
   render() {
-    console.log(this.props.product);
-    console.log(this.state.selectedAttributes);
     const description = this.props.product.description;
     return (
       <ProductViewStyle>
