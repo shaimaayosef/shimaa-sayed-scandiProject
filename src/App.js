@@ -12,17 +12,6 @@ import { getCurrency } from "./store/currencySlice";
 import Clothes from "./pages/Clothes";
 import Tech from "./pages/Tech";
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false,
-    };
-  }
-  handleModal() {
-    this.setState((prev) => ({
-      modal: !prev.modal,
-    }));
-  }
   render() {
     this.props.client
       .query({
@@ -81,10 +70,8 @@ class App extends Component {
 
     return (
       <div>
-        <Navbar handleModal={() => this.handleModal()} />
-        {this.state.modal && (
-          <CartOverlay handleModal={() => this.handleModal()} />
-        )}
+        <Navbar />
+        {this.props.showCart && <CartOverlay />}
         <div>
           {this.props.categories.length > 0 ? (
             <Routes>
@@ -107,6 +94,7 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   categories: state.categories,
   currency: state.currency.currency,
+  showCart: state.cart.showCart,
 });
 
 const mapDispatchToProps = { getCategories, getCurrency };

@@ -7,6 +7,7 @@ import arrowUp from "../../Vectorup.svg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { ubdateCurrency } from "../../store/currencySlice";
+import { setShowCart } from "../../store/cartSlice";
 
 class Navbar extends Component {
   constructor(props) {
@@ -91,13 +92,18 @@ class Navbar extends Component {
             )}
             <div className="cart">
               <div className="badge">
-                <span>3</span>
+                <span>
+                  {this.props.cartItems.reduce(
+                    (acc, item) => acc + item.qty,
+                    0
+                  )}
+                </span>
               </div>
               <img
                 src={cartSvg}
                 alt="cart logo"
                 className="cart-img"
-                onClick={this.props.handleModal}
+                onClick={() => this.props.setShowCart(!this.props.showCart)}
               />
             </div>
           </div>
@@ -110,8 +116,10 @@ const mapStateToProps = (state) => ({
   currency: state.currency.currency,
   selectedCurrency: state.currency.selectedCurrency,
   categories: state.categories,
+  showCart: state.cart.showCart,
+  cartItems: state.cart.cartItems,
 });
 
-const mapDispatchToProps = { ubdateCurrency };
+const mapDispatchToProps = { ubdateCurrency, setShowCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

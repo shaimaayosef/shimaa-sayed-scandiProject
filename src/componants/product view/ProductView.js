@@ -1,21 +1,49 @@
 import { ProductViewStyle } from "./styles/ProductView.styled";
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addToCart, updateCart } from "../../store/cartSlice";
 
-export default class ProductView extends Component {
+class ProductView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       src: this.props.product.gallery[0],
+      selectedAttributes: {},
     };
   }
-
+  selectAttributes(value, attribute) {
+    this.setState((prevState) => ({
+      ...prevState,
+      selectedAttributes: {
+        ...prevState.selectedAttributes,
+        [attribute]: value,
+      },
+    }));
+  }
   changeImg(src) {
     this.setState((prevState) => ({
+      ...prevState,
       src: src,
     }));
   }
+  addToCart() {
+    const isExist = this.props.cartItems.filter(
+      (item) => item.id === this.props.product.id
+    )[0];
+    // const updatedProduct = Object.keys(this.state.selectedAttributes).map(
+    //   (key) => ({
+    //     ...this.props.product,
+    //     [key]: this.state.selectedAttributes.key,
+    //   })
+    // );
+    // console.log(updatedProduct);
+    isExist
+      ? this.props.updateCart(this.props.product)
+      : this.props.addToCart(this.props.product);
+  }
   render() {
     console.log(this.props.product);
+    console.log(this.state.selectedAttributes);
     const description = this.props.product.description;
     return (
       <ProductViewStyle>
@@ -43,7 +71,11 @@ export default class ProductView extends Component {
                   <h4>Size:</h4>
                   <div className="size-box">
                     {d.items.map((size, i) => (
-                      <div className="size-x" key={i}>
+                      <div
+                        className="size-x"
+                        key={i}
+                        onClick={() => this.selectAttributes(size.value, d.id)}
+                      >
                         {size.value}
                       </div>
                     ))}
@@ -57,7 +89,13 @@ export default class ProductView extends Component {
                   <h4>Capacity:</h4>
                   <div className="size-box">
                     {d.items.map((capacity, i) => (
-                      <div key={i} className="size-x">
+                      <div
+                        key={i}
+                        className="size-x"
+                        onClick={() =>
+                          this.selectAttributes(capacity.value, d.id)
+                        }
+                      >
                         {capacity.value}
                       </div>
                     ))}
@@ -75,6 +113,7 @@ export default class ProductView extends Component {
                         key={i}
                         className="color-x"
                         style={{ backgroundColor: `${color.value}` }}
+                        onClick={() => this.selectAttributes(color.value, d.id)}
                       ></div>
                     ))}
                   </div>
@@ -91,7 +130,9 @@ export default class ProductView extends Component {
               </span>
             </div>
 
-            <button className="add">add to card</button>
+            <button className="add" onClick={() => this.addToCart()}>
+              add to card
+            </button>
             <p
               className="descreption"
               //This dangerouslySetInnerHTML is dangerous, but since we do not take from users, but rather from the back-end, it will not be dangerous because the back-end is reliable.
@@ -103,3 +144,9 @@ export default class ProductView extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.cartItems,
+});
+const mapDispatchToProps = { addToCart, updateCart };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductView);

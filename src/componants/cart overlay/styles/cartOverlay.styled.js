@@ -9,7 +9,6 @@ export const CartOverlayStyel = styled.div`
   .cart-overlay {
     position: absolute;
     width: 325px;
-    height: 610px;
     left: 1043px;
     top: 10px;
     background: #ffffff;
@@ -71,17 +70,11 @@ export const CartOverlayStyel = styled.div`
 `;
 export const CartItemStyel = styled.div`
   .cart-item {
-    //   border-bottom: #e5e5e5 solid 1px;
-    //   border-top: #e5e5e5 solid 1px;
     padding: 5px;
     width: 293px;
     height: 200px;
     display: flex;
-    // position: absolute;
-    // left: 150px;
-    // top: 120px;
     .product-info {
-      // margin-top: -15px;
       margin-right: 20px;
       h2 {
         color: #1d1f22;
@@ -101,58 +94,63 @@ export const CartItemStyel = styled.div`
           color: #1d1f22;
         }
       }
-      .size {
+      .attributes {
         display: flex;
         flex-direction: column;
-        margin-top: -8px;
-        h4 {
-          font-style: normal;
-          font-weight: 400;
-          font-size: 14px;
-          color: #1d1f22;
-        }
-        .size-box {
+        width: 130px;
+        .size {
           display: flex;
-          margin-top: -20px;
-          .size-x {
-            border: 1px solid #1d1f22;
-            width: 24px;
-            height: 24px;
-            margin: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 14px;
+          flex-direction: column;
+          margin-top: -8px;
+          h4 {
+            font-style: normal;
             font-weight: 400;
+            font-size: 14px;
+            color: #1d1f22;
+          }
+          .size-box {
+            display: flex;
+            margin-top: -20px;
+            .size-x {
+              border: 1px solid #1d1f22;
+              width: 33px;
+              height: 24px;
+              margin: 2px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              text-transform: uppercase;
+              font-size: 14px;
+              font-weight: 400;
+            }
           }
         }
-      }
-      .color {
-        display: flex;
-        flex-direction: column;
-        margin-top: -8px;
-
-        h4 {
-          font-style: normal;
-          font-weight: 400;
-          font-size: 14px;
-          color: #1d1f22;
-        }
-        .color-box {
+        .color {
           display: flex;
-          margin-top: -20px;
-          .color-x {
-            border: #1d1f22 solid 1px;
-            width: 16px;
-            height: 16px;
-            background-color: rgba(15, 100, 80, 1);
-            margin: 2px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 14px;
+          flex-direction: column;
+          margin-top: -8px;
+
+          h4 {
+            font-style: normal;
             font-weight: 400;
+            font-size: 14px;
+            color: #1d1f22;
+          }
+          .color-box {
+            display: flex;
+            margin-top: -20px;
+            .color-x {
+              border: #1d1f22 solid 1px;
+              width: 16px;
+              height: 16px;
+              background-color: rgba(15, 100, 80, 1);
+              margin: 2px;
+              cursor: pointer;
+              text-transform: uppercase;
+              font-size: 14px;
+              font-weight: 400;
+            }
           }
         }
       }
