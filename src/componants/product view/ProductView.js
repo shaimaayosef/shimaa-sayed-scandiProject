@@ -2,6 +2,8 @@ import { ProductViewStyle } from "./styles/ProductView.styled";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addToCart, updateCart } from "../../store/cartSlice";
+import { EditorState, Editor } from "draft-js";
+import { convertFromHTML } from "draft-convert";
 
 class ProductView extends Component {
   constructor(props) {
@@ -12,8 +14,10 @@ class ProductView extends Component {
       selectedColor: 0,
       selectedSize: 0,
       selectedCapasity: 0,
+      editorState: EditorState.createEmpty(),
     };
   }
+
   selectAttributes(name, index) {
     this.setState((prevState) => ({
       ...prevState,
@@ -29,13 +33,27 @@ class ProductView extends Component {
       src: src,
     }));
   }
-  addToCart() {
+  addProToCart() {
     const isExist = this.props.cartItems.filter(
       (item) => item.id === this.props.product.id
     )[0];
     isExist
       ? this.props.updateCart(this.props.product)
       : this.props.addToCart(this.props.product);
+  }
+  onChange = (editorState) => {
+    this.setState({
+      editorState,
+    });
+  };
+  componentDidMount() {
+    const { editorState } = this.state;
+    this.onChange(
+      EditorState.push(
+        editorState,
+        convertFromHTML(this.props.product.description)
+      )
+    );
   }
   render() {
     const description = this.props.product.description;
@@ -147,14 +165,15 @@ class ProductView extends Component {
               </span>
             </div>
 
-            <button className="add" onClick={() => this.addToCart()}>
+            <button className="add" onClick={() => this.addProToCart()}>
               add to card
             </button>
-            <p
-              className="descreption"
-              //This dangerouslySetInnerHTML is dangerous, but since we do not take from users, but rather from the back-end, it will not be dangerous because the back-end is reliable.
-              dangerouslySetInnerHTML={{ __html: description }}
-            ></p>
+            <p className="descreption">
+              <Editor
+                editorState={this.state.editorState}
+                onChange={this.onChange}
+              />
+            </p>
           </div>
         </div>
       </ProductViewStyle>

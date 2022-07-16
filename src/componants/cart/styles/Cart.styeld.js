@@ -68,6 +68,10 @@ export const CartStyle = styled.div`
               justify-content: center;
               cursor: pointer;
             }
+            .selected {
+              background-color: #1d1f22;
+              color: #ffffff;
+            }
           }
         }
         .color {
@@ -91,6 +95,9 @@ export const CartStyle = styled.div`
               background-color: rgba(15, 100, 80, 1);
               margin: 2px;
               cursor: pointer;
+            }
+            .selected {
+              border: #5ece7b solid 3px;
             }
           }
         }

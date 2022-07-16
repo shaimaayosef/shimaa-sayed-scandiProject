@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { addToCart, updateCart } from "../../store/cartSlice";
 
 class Card extends Component {
-  addToCart() {
+  addProToCart() {
     const isExist = this.props.cartItems.filter(
       (item) => item.id === this.props.product.id
     )[0];
@@ -30,7 +30,7 @@ class Card extends Component {
               <img
                 src={ProCartSvg}
                 alt="cart-logo"
-                onClick={() => this.addToCart()}
+                onClick={() => this.addProToCart()}
               />
             </div>
           </div>

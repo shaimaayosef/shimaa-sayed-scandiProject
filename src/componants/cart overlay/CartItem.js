@@ -6,6 +6,15 @@ import { removeFromCart, updateCart, deletItem } from "../../store/cartSlice";
 import { connect } from "react-redux";
 
 class CartItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedAttributes: {},
+      selectedColor: 0,
+      selectedSize: 0,
+      selectedCapasity: 0,
+    };
+  }
   removeItem() {
     this.props.item.qty === 1
       ? this.props.deletItem(this.props.item)
@@ -35,7 +44,19 @@ class CartItem extends Component {
                     <h4>Size:</h4>
                     <div className="size-box">
                       {d.items.map((size, i) => (
-                        <div className="size-x" key={i}>
+                        <div
+                          key={i}
+                          className={`size-x ${
+                            this.state.selectedSize === i ? "selected" : ""
+                          }`}
+                          onClick={() => {
+                            this.setState((prevState) => ({
+                              ...prevState,
+                              selectedSize: i,
+                            }));
+                            this.selectAttributes(d.id, i);
+                          }}
+                        >
                           {size.value}
                         </div>
                       ))}
@@ -49,7 +70,19 @@ class CartItem extends Component {
                     <h4>Capacity:</h4>
                     <div className="size-box">
                       {d.items.map((capacity, i) => (
-                        <div key={i} className="size-x">
+                        <div
+                          key={i}
+                          className={`size-x ${
+                            this.state.selectedCapasity === i ? "selected" : ""
+                          }`}
+                          onClick={() => {
+                            this.setState((prevState) => ({
+                              ...prevState,
+                              selectedCapasity: i,
+                            }));
+                            this.selectAttributes(d.id, i);
+                          }}
+                        >
                           {capacity.value}
                         </div>
                       ))}
@@ -65,7 +98,16 @@ class CartItem extends Component {
                       {d.items.map((color, i) => (
                         <div
                           key={i}
-                          className="color-x"
+                          className={`color-x ${
+                            this.state.selectedColor === i ? "selected" : ""
+                          }`}
+                          onClick={() => {
+                            this.setState((prevState) => ({
+                              ...prevState,
+                              selectedColor: i,
+                            }));
+                            this.selectAttributes(d.id, i);
+                          }}
                           style={{ backgroundColor: `${color.value}` }}
                         ></div>
                       ))}

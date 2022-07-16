@@ -124,6 +124,10 @@ export const CartItemStyel = styled.div`
               font-size: 14px;
               font-weight: 400;
             }
+            .selected {
+              background-color: #1d1f22;
+              color: #ffffff;
+            }
           }
         }
         .color {
@@ -150,6 +154,9 @@ export const CartItemStyel = styled.div`
               text-transform: uppercase;
               font-size: 14px;
               font-weight: 400;
+            }
+            .selected {
+              border: #5ece7b solid 3px;
             }
           }
         }
