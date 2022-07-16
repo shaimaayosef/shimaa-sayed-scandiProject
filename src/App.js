@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 import Navbar from "./componants/navbar/Navbar";
-import CartOverlay from "./pages/CartOverlayPage";
+import CartOverlay from "./componants/cart overlay/CartOverlay";
 import CartPage from "./pages/CartPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import All from "./pages/All";

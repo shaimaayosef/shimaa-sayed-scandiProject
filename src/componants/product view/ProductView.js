@@ -56,7 +56,6 @@ class ProductView extends Component {
     );
   }
   render() {
-    const description = this.props.product.description;
     console.log(this.props.cartItems);
     return (
       <ProductViewStyle>
