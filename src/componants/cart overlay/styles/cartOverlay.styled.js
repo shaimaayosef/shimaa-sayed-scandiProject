@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const CartOverlayStyel = styled.div`
   z-index: 10;
   position: absolute;
-  left: 30px;
   top: 65px;
+  right: 30px;
 
   .cart-overlay {
-    position: absolute;
+    /* position: absolute; */
     width: 325px;
-    left: 1043px;
-    top: 10px;
+    /* left: 1043px;
+    top: 10px; */
     background: #ffffff;
     padding: 10px;
     h3 {
