@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProductView from "../componants/product view/ProductView";
+import ProductView from "../components/product view/ProductView";
 import { connect } from "react-redux";
 
 class ProductDescriptionPage extends Component {

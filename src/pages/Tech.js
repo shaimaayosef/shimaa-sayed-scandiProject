@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CardContainer from "../componants/card/CardContainer";
+import CardContainer from "../components/card/CardContainer";
 import { connect } from "react-redux";
 
 class Tech extends Component {
