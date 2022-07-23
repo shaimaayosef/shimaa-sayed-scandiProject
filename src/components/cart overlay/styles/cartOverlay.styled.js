@@ -24,17 +24,19 @@ export const CartOverlayStyel = styled.div`
       font-weight: 700;
       font-size: 16px;
     }
-    .ptn {
+    .btn {
       display: flex;
 
-      .view-ptn {
+      .view-btn {
+        text-decoration: none;
+        border: #0c0c0c solid 1px;
         font-family: "Raleway";
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 2px;
         width: 140px;
-        height: 43px;
+        /* height: 43px; */
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
@@ -43,10 +45,9 @@ export const CartOverlayStyel = styled.div`
         background: #ffffff;
         color: #0c0c0c;
         margin: 8px;
-        //   margin-top: 12px;
         cursor: pointer;
       }
-      .check-ptn {
+      .check-btn {
         font-family: "Raleway";
         display: flex;
         align-items: center;
@@ -62,7 +63,6 @@ export const CartOverlayStyel = styled.div`
         color: #ffffff;
         border: none;
         margin: 8px;
-        //   margin-top: 12px;
         cursor: pointer;
       }
     }

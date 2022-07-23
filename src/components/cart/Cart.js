@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ProductCart from "./ProductCart";
 import { CartStyle } from "./styles/Cart.styeld";
 import { connect } from "react-redux";
-import { setShowCart } from "../../store/cartSlice";
+import { setShowModal, setShowCart } from "../../store/cartSlice";
 class Cart extends Component {
   render() {
     return (
@@ -16,10 +16,11 @@ class Cart extends Component {
                 item={item}
                 selectedCurrency={this.props.selectedCurrency.i}
                 currency={this.props.currency}
+                id={i}
               />
             ))
           ) : (
-            <p>nothing here ediot</p>
+            <p>cart is empty</p>
           )}
           <div className="order">
             <p>
@@ -66,7 +67,15 @@ class Cart extends Component {
                     .toFixed(2)}
               </span>
             </p>
-            <button className="order-ptn">order</button>
+            <button
+              className="order-btn"
+              onClick={() => {
+                this.props.setShowModal(true);
+                this.props.setShowCart(false);
+              }}
+            >
+              order
+            </button>
             <div></div>
           </div>
         </div>
@@ -79,7 +88,8 @@ const mapStateToProps = (state) => ({
   cartItems: state.cart.cartItems,
   selectedCurrency: state.currency.selectedCurrency,
   currency: state.currency.currency,
+  showModal: state.cart.showModal,
 });
-const mapDispatchToProps = { setShowCart };
+const mapDispatchToProps = { setShowModal, setShowCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

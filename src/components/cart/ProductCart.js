@@ -5,7 +5,12 @@ import AfterArrowSvg from "../../Group 1418.svg";
 import MinusSvg from "../../minus-square.svg";
 import AddSvg from "../../plus-square.svg";
 import { Link } from "react-router-dom";
-import { removeFromCart, updateCart, deletItem } from "../../store/cartSlice";
+import {
+  removeFromCart,
+  updateCart,
+  deletItem,
+  updateProduct,
+} from "../../store/cartSlice";
 import { connect } from "react-redux";
 
 class ProductCart extends Component {
@@ -14,11 +19,13 @@ class ProductCart extends Component {
     this.state = {
       index: 0,
       src: this.props.item.gallery[0],
-      selectedAttributes: {},
-      selectedColor: 0,
-      selectedSize: 0,
-      selectedCapasity: 0,
+      selectedColor: this.props.item.selectedColor,
+      selectedSize: this.props.item.selectedSize,
+      selectedCapasity: this.props.item.selectedCapasity,
     };
+  }
+  componentDidUpdate() {
+    localStorage.setItem("cartItems", JSON.stringify(this.props.cartItems));
   }
   after() {
     this.setState((prev) => ({
@@ -37,8 +44,20 @@ class ProductCart extends Component {
   }
   removeItem() {
     this.props.item.qty === 1
-      ? this.props.deletItem(this.props.item)
-      : this.props.removeFromCart(this.props.item);
+      ? this.props.deletItem(this.props.id)
+      : this.props.removeFromCart(this.props.id);
+  }
+  addProToCart(attr, value) {
+    this.props.updateProduct({
+      ...this.props.item,
+      selectedSize:
+        attr === "selectedSize" ? value : this.props.item.selectedSize,
+      selectedColor:
+        attr === "selectedColor" ? value : this.props.item.selectedColor,
+      selectedCapasity:
+        attr === "selectedCapasity" ? value : this.props.item.selectedCapasity,
+      index: this.props.id,
+    });
   }
   render() {
     return (
@@ -49,7 +68,6 @@ class ProductCart extends Component {
             <h3>{this.props.item.name}</h3>
             <div className="price">
               <span>
-                {" "}
                 {
                   this.props.item.prices[this.props.selectedCurrency].currency
                     .symbol
@@ -67,14 +85,14 @@ class ProductCart extends Component {
                       {d.items.map((size, i) => (
                         <div
                           className={`size-x ${
-                            this.state.selectedSize === i ? "selected" : ""
+                            this.props.item.selectedSize === i ? "selected" : ""
                           }`}
                           onClick={() => {
                             this.setState((prevState) => ({
                               ...prevState,
                               selectedSize: i,
                             }));
-                            this.selectAttributes(d.id, i);
+                            this.addProToCart("selectedSize", i);
                           }}
                           key={i}
                         >
@@ -94,14 +112,16 @@ class ProductCart extends Component {
                         <div
                           key={i}
                           className={`size-x ${
-                            this.state.selectedCapasity === i ? "selected" : ""
+                            this.props.item.selectedCapasity === i
+                              ? "selected"
+                              : ""
                           }`}
                           onClick={() => {
                             this.setState((prevState) => ({
                               ...prevState,
                               selectedCapasity: i,
                             }));
-                            this.selectAttributes(d.id, i);
+                            this.addProToCart("selectedCapasity", i);
                           }}
                         >
                           {capacity.value}
@@ -120,14 +140,16 @@ class ProductCart extends Component {
                         <div
                           key={i}
                           className={`color-x ${
-                            this.state.selectedColor === i ? "selected" : ""
+                            this.props.item.selectedColor === i
+                              ? "selected"
+                              : ""
                           }`}
                           onClick={() => {
                             this.setState((prevState) => ({
                               ...prevState,
                               selectedColor: i,
                             }));
-                            this.selectAttributes(d.id, i);
+                            this.addProToCart("selectedColor", i);
                           }}
                           style={{ backgroundColor: `${color.value}` }}
                         ></div>
@@ -142,7 +164,9 @@ class ProductCart extends Component {
               <img
                 src={AddSvg}
                 alt="plus"
-                onClick={() => this.props.updateCart(this.props.item)}
+                onClick={() => {
+                  this.props.updateCart(this.props.id);
+                }}
               />
             </div>
             <span>{this.props.item.qty}</span>
@@ -186,6 +210,11 @@ const mapStateToProps = (state) => ({
   showCart: state.cart.showCart,
   cartItems: state.cart.cartItems,
 });
-const mapDispatchToProps = { removeFromCart, updateCart, deletItem };
+const mapDispatchToProps = {
+  removeFromCart,
+  updateCart,
+  deletItem,
+  updateProduct,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCart);

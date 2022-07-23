@@ -28,7 +28,7 @@ export const CardStyel = styled.div`
       }
     }
     .cardsDiv {
-      width: 1238 px;
+      width: 100%;
       margin-left: 100px;
       margin-right: 100px;
       margin-bottom: 271px;
@@ -38,29 +38,49 @@ export const CardStyel = styled.div`
     }
   }
   .pro-card {
+    position: relative;
+    .outStock {
+      display: flex;
+      justify-content: center;
+      padding-top: 165px;
+      color: rgba(141, 143, 154, 1);
+      text-transform: uppercase;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 160%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      opacity: 0.5;
+    }
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 16px;
     width: 386px;
     height: 444px;
-    left: calc(50% - 386px / 2 - 427px);
-    bottom: 738px;
     cursor: pointer;
     .product-img {
       width: 383px;
       height: 330px;
     }
+
     .cart-badge {
+      position: absolute;
       background: #5ece7b;
+      top: 315px;
+      right: 30px;
       width: 60px;
       height: 60px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       text-align: center;
-      margin-top: -26px;
-      margin-left: 310px;
+      /* margin-top: -26px;
+      margin-left: 310px; */
 
       .c-img {
         margin-left: 12px;

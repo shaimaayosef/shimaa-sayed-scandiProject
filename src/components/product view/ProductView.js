@@ -1,7 +1,7 @@
 import { ProductViewStyle } from "./styles/ProductView.styled";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addToCart, updateCart } from "../../store/cartSlice";
+import { addToCart, updateCart, updateProduct } from "../../store/cartSlice";
 import { EditorState, Editor } from "draft-js";
 import { convertFromHTML } from "draft-convert";
 
@@ -10,7 +10,6 @@ class ProductView extends Component {
     super(props);
     this.state = {
       src: this.props.product.gallery[0],
-      selectedAttributes: {},
       selectedColor: 0,
       selectedSize: 0,
       selectedCapasity: 0,
@@ -18,15 +17,6 @@ class ProductView extends Component {
     };
   }
 
-  selectAttributes(name, index) {
-    this.setState((prevState) => ({
-      ...prevState,
-      selectedAttributes: {
-        ...prevState.selectedAttributes,
-        [name]: index,
-      },
-    }));
-  }
   changeImg(src) {
     this.setState((prevState) => ({
       ...prevState,
@@ -34,13 +24,14 @@ class ProductView extends Component {
     }));
   }
   addProToCart() {
-    const isExist = this.props.cartItems.filter(
-      (item) => item.id === this.props.product.id
-    )[0];
-    isExist
-      ? this.props.updateCart(this.props.product)
-      : this.props.addToCart(this.props.product);
+    this.props.addToCart({
+      ...this.props.product,
+      selectedSize: this.state.selectedSize,
+      selectedColor: this.state.selectedColor,
+      selectedCapasity: this.state.selectedCapasity,
+    });
   }
+
   onChange = (editorState) => {
     this.setState({
       editorState,
@@ -54,6 +45,7 @@ class ProductView extends Component {
         convertFromHTML(this.props.product.description)
       )
     );
+    localStorage.setItem("cartItems", JSON.stringify(this.props.cartItems));
   }
   render() {
     console.log(this.props.cartItems);
@@ -93,7 +85,6 @@ class ProductView extends Component {
                             ...prevState,
                             selectedSize: i,
                           }));
-                          this.selectAttributes(d.id, i);
                         }}
                       >
                         {size.value}
@@ -119,7 +110,6 @@ class ProductView extends Component {
                             ...prevState,
                             selectedCapasity: i,
                           }));
-                          this.selectAttributes(d.id, i);
                         }}
                       >
                         {capacity.value}
@@ -146,7 +136,6 @@ class ProductView extends Component {
                             ...prevState,
                             selectedColor: i,
                           }));
-                          this.selectAttributes(d.id, i);
                         }}
                       ></div>
                     ))}
@@ -163,10 +152,13 @@ class ProductView extends Component {
                 {this.props.product.prices[this.props.selectedCurrency].amount}
               </span>
             </div>
-
-            <button className="add" onClick={() => this.addProToCart()}>
-              add to card
-            </button>
+            {this.props.product.inStock ? (
+              <button className="add" onClick={() => this.addProToCart()}>
+                add to card
+              </button>
+            ) : (
+              <p className="out">out of stock</p>
+            )}
             <p className="descreption">
               <Editor
                 editorState={this.state.editorState}
@@ -182,6 +174,6 @@ class ProductView extends Component {
 const mapStateToProps = (state) => ({
   cartItems: state.cart.cartItems,
 });
-const mapDispatchToProps = { addToCart, updateCart };
+const mapDispatchToProps = { addToCart, updateCart, updateProduct };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductView);

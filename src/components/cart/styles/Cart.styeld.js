@@ -13,7 +13,7 @@ export const CartStyle = styled.div`
     // top: 120px;
     .product-info {
       margin-top: -15px;
-      margin-right: 700px;
+      margin-right: 671px;
       h2 {
         color: #1d1f22;
         font-style: normal;
@@ -187,7 +187,7 @@ export const CartStyle = styled.div`
           color: #1d1f22;
         }
       }
-      .order-ptn {
+      .order-btn {
         display: flex;
         align-items: center;
         justify-content: center;

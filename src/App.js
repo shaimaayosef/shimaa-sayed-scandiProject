@@ -11,6 +11,7 @@ import { getCategories } from "./store/categoriesSlice";
 import { getCurrency } from "./store/currencySlice";
 import Clothes from "./pages/Clothes";
 import Tech from "./pages/Tech";
+import Modal from "./components/modal/Modal";
 class App extends Component {
   render() {
     this.props.client
@@ -72,6 +73,7 @@ class App extends Component {
       <div>
         <Navbar />
         {this.props.showCart && <CartOverlay />}
+        {this.props.showModal && <Modal />}
         <div>
           {this.props.categories.length > 0 ? (
             <Routes>
@@ -95,6 +97,7 @@ const mapStateToProps = (state) => ({
   categories: state.categories,
   currency: state.currency.currency,
   showCart: state.cart.showCart,
+  showModal: state.cart.showModal,
 });
 
 const mapDispatchToProps = { getCategories, getCurrency };

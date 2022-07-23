@@ -118,7 +118,24 @@ export const ProductViewStyle = styled.div`
           margin-top: -10px;
         }
       }
-
+      .out {
+        /* padding: 16px 32px; */
+        width: 288px;
+        height: 52px;
+        background: #5ece7b;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 120%;
+        text-transform: uppercase;
+        text-align: center;
+        color: #ffffff;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* margin-top: 20px; */
+      }
       .add {
         padding: 16px 32px;
         width: 288px;

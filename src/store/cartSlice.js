@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cartItems: [],
+  cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
   showCart: false,
+  showModal: false,
 };
 
 export const cartSlice = createSlice({
@@ -12,6 +13,12 @@ export const cartSlice = createSlice({
     setShowCart: (state, action) => {
       state.showCart = action.payload;
     },
+    setShowModal: (state, action) => {
+      state.showModal = action.payload;
+    },
+    resetCart: (state, action) => {
+      state.cartItems = [];
+    },
     addToCart: (state, action) => {
       state.cartItems.push({
         ...action.payload,
@@ -19,29 +26,38 @@ export const cartSlice = createSlice({
       });
     },
     updateCart: (state, action) => {
-      const { id } = action.payload;
-      state.cartItems.map((item) =>
-        item.id === id ? { ...item, qty: item.qty++ } : item
+      const id = action.payload;
+      state.cartItems.map((item, i) =>
+        i === id ? { ...item, qty: item.qty++ } : item
       );
     },
-
+    updateProduct: (state, action) => {
+      const id = action.payload.index;
+      console.log(action.payload);
+      state.cartItems.splice(id, 1, action.payload);
+    },
     removeFromCart: (state, action) => {
-      const { id } = action.payload;
-      state.cartItems.map((item) =>
-        item.id === id
-          ? { ...item, qty: item.qty > 0 ? item.qty-- : item.qty }
-          : item
+      const id = action.payload;
+      state.cartItems.map((item, i) =>
+        i === id ? { ...item, qty: item.qty > 0 ? item.qty-- : item.qty } : item
       );
     },
     deletItem: (state, action) => {
-      const { id } = action.payload;
-      const index = state.cartItems.findIndex((item) => item.id === id);
-      state.cartItems.splice(index, 1);
+      const id = action.payload;
+      state.cartItems.splice(id, 1);
     },
   },
 });
 
-export const { setShowCart, addToCart, updateCart, removeFromCart, deletItem } =
-  cartSlice.actions;
+export const {
+  setShowCart,
+  addToCart,
+  updateCart,
+  removeFromCart,
+  deletItem,
+  updateProduct,
+  setShowModal,
+  resetCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

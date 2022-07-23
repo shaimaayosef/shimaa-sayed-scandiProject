@@ -3,7 +3,7 @@ import CartItem from "./CartItem";
 import { CartOverlayStyel } from "./styles/cartOverlay.styled";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setShowCart } from "../../store/cartSlice";
+import { setShowCart, setShowModal } from "../../store/cartSlice";
 
 class CartOverlay extends Component {
   render() {
@@ -16,10 +16,16 @@ class CartOverlay extends Component {
         <CartOverlayStyel>
           <div className="cart-overlay">
             <h3>
-              My Bag,
+              My Bag, &nbsp;
               <span>
-                {this.props.cartItems.reduce((acc, item) => acc + item.qty, 0)}
-                items
+                <span style={{ fontWeight: "bold" }}>
+                  {" "}
+                  {this.props.cartItems.reduce(
+                    (acc, item) => acc + item.qty,
+                    0
+                  )}
+                </span>
+                &nbsp; items
               </span>
             </h3>
             {this.props.cartItems.length > 0 ? (
@@ -29,39 +35,54 @@ class CartOverlay extends Component {
                   item={item}
                   selectedCurrency={this.props.selectedCurrency.i}
                   currency={this.props.currency}
+                  id={i}
                 />
               ))
             ) : (
-              <p>nothing here ediot</p>
+              <p>cart is empty</p>
             )}
-            <p>
-              Total &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              {(this.props.currency.length > 0 &&
-                this.props.currency[this.props.selectedCurrency.i].symbol) ||
-                "$"}
-              {this.props.cartItems.length > 0 &&
-                this.props.cartItems
-                  .reduce(
-                    (acc, item) =>
-                      acc +
-                      item.prices[this.props.selectedCurrency.i].amount *
-                        item.qty,
-                    0
-                  )
-                  .toFixed(2)}
-            </p>
-            <div className="ptn">
-              <Link
-                to="/cart"
-                className="view-ptn"
-                onClick={() => this.props.setShowCart(false)}
-              >
-                View bag
-              </Link>
-              <button className="check-ptn">CHECK OUT</button>
-            </div>
+            {this.props.cartItems.length > 0 && (
+              <>
+                <p>
+                  Total &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  {(this.props.currency.length > 0 &&
+                    this.props.currency[this.props.selectedCurrency.i]
+                      .symbol) ||
+                    "$"}
+                  {this.props.cartItems.length > 0 &&
+                    this.props.cartItems
+                      .reduce(
+                        (acc, item) =>
+                          acc +
+                          item.prices[this.props.selectedCurrency.i].amount *
+                            item.qty,
+                        0
+                      )
+                      .toFixed(2)}
+                </p>
+
+                <div className="btn">
+                  <Link
+                    to="/cart"
+                    className="view-btn"
+                    onClick={() => this.props.setShowCart(false)}
+                  >
+                    View bag
+                  </Link>
+                  <button
+                    className="check-btn"
+                    onClick={() => {
+                      this.props.setShowModal(true);
+                      this.props.setShowCart(false);
+                    }}
+                  >
+                    CHECK OUT
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </CartOverlayStyel>
       </>
@@ -74,6 +95,6 @@ const mapStateToProps = (state) => ({
   selectedCurrency: state.currency.selectedCurrency,
   currency: state.currency.currency,
 });
-const mapDispatchToProps = { setShowCart };
+const mapDispatchToProps = { setShowCart, setShowModal };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartOverlay);
