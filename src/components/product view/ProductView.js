@@ -159,12 +159,12 @@ class ProductView extends Component {
             ) : (
               <p className="out">out of stock</p>
             )}
-            <p className="descreption">
+            <div className="descreption">
               <Editor
                 editorState={this.state.editorState}
                 onChange={this.onChange}
               />
-            </p>
+            </div>
           </div>
         </div>
       </ProductViewStyle>
@@ -176,4 +176,4 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = { addToCart, updateCart, updateProduct };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductView);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductView); 

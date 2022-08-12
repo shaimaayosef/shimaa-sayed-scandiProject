@@ -12,6 +12,7 @@ export const CardStyel = styled.div`
     .title {
       width: 299px;
       height: 68px;
+      font-family: "Raleway";
       left: calc(50% - 299px / 2 - 469.5px);
       top: calc(50% - 68px / 2 - 562.5px);
       display: flex;
@@ -48,6 +49,7 @@ export const CardStyel = styled.div`
       font-weight: 400;
       font-size: 24px;
       line-height: 160%;
+      font-family: "Raleway";
       position: absolute;
       top: 0;
       left: 0;
@@ -95,12 +97,14 @@ export const CardStyel = styled.div`
       font-size: 18px;
       margin-bottom: -13px;
       color: rgb(51, 53, 55);
+      font-family: "Raleway";
     }
     .price {
       margin-top: 20px;
       margin-bottom: -10px;
       font-weight: 600;
       font-size: 18px;
+      font-family: "Raleway";
       text-align: right;
       color: #1d1f22;
     }

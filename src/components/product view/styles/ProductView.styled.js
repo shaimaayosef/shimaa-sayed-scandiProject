@@ -30,6 +30,7 @@ export const ProductViewStyle = styled.div`
       width: 520px;
       height: 595px;
       h2 {
+        font-family: "Raleway";
         color: #1d1f22;
         font-style: normal;
         font-weight: 600;
@@ -37,6 +38,7 @@ export const ProductViewStyle = styled.div`
         line-height: 27px;
       }
       h3 {
+        font-family: "Raleway";
         font-style: normal;
         font-weight: 400;
         font-size: 30px;
@@ -49,6 +51,8 @@ export const ProductViewStyle = styled.div`
         flex-direction: column;
         margin-top: -8px;
         h4 {
+          font-family: "Roboto Condensed";
+          text-transform: uppercase;
           font-style: normal;
           font-weight: 700;
           font-size: 18px;
@@ -60,6 +64,7 @@ export const ProductViewStyle = styled.div`
           display: flex;
           margin-top: -20px;
           .size-x {
+            font-family: "Source Sans Pro";
             border: 1px solid #1d1f22;
             width: 63px;
             height: 45px;
@@ -80,6 +85,8 @@ export const ProductViewStyle = styled.div`
         flex-direction: column;
         margin-top: 10px;
         h4 {
+          font-family: "Roboto Condensed";
+          text-transform: uppercase;
           font-style: normal;
           font-weight: 700;
           font-size: 18px;
@@ -87,6 +94,7 @@ export const ProductViewStyle = styled.div`
           margin-top: -5px;
         }
         .color-box {
+          font-family: "Source Sans Pro";
           display: flex;
           margin-top: -15px;
           .color-x {
@@ -105,6 +113,8 @@ export const ProductViewStyle = styled.div`
         display: flex;
         flex-direction: column;
         h4 {
+          text-transform: uppercase;
+          font-family: "Roboto Condensed";
           font-style: normal;
           font-weight: 700;
           font-size: 18px;
@@ -142,6 +152,7 @@ export const ProductViewStyle = styled.div`
         height: 52px;
         background: #5ece7b;
         font-style: normal;
+        font-family: "Raleway";
         font-weight: 500;
         font-size: 16px;
         line-height: 120%;
@@ -153,6 +164,7 @@ export const ProductViewStyle = styled.div`
       }
       .descreption {
         font-style: normal;
+        font-family: "Roboto";
         font-weight: 400;
         font-size: 16px;
         color: #1d1f22;

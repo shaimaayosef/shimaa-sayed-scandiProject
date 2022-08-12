@@ -24,7 +24,7 @@ class Cart extends Component {
           )}
           <div className="order">
             <p>
-              Tax 21%:
+              Tax 21%:&nbsp; &nbsp;
               <span>
                 {(this.props.currency.length > 0 &&
                   this.props.currency[this.props.selectedCurrency.i].symbol) ||
@@ -44,13 +44,13 @@ class Cart extends Component {
               </span>
             </p>
             <p>
-              Quantity:
+              Quantity:&nbsp;
               <span>
                 {this.props.cartItems.reduce((acc, item) => acc + item.qty, 0)}
               </span>
             </p>
-            <p>
-              Total:
+            <p className="total">
+              Total:&nbsp; &nbsp; &nbsp; &nbsp;
               <span>
                 {(this.props.currency.length > 0 &&
                   this.props.currency[this.props.selectedCurrency.i].symbol) ||

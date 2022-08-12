@@ -47,20 +47,22 @@ class CartOverlay extends Component {
                   Total &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  {(this.props.currency.length > 0 &&
-                    this.props.currency[this.props.selectedCurrency.i]
-                      .symbol) ||
-                    "$"}
-                  {this.props.cartItems.length > 0 &&
-                    this.props.cartItems
-                      .reduce(
-                        (acc, item) =>
-                          acc +
-                          item.prices[this.props.selectedCurrency.i].amount *
-                            item.qty,
-                        0
-                      )
-                      .toFixed(2)}
+                  <span>
+                    {(this.props.currency.length > 0 &&
+                      this.props.currency[this.props.selectedCurrency.i]
+                        .symbol) ||
+                      "$"}
+                    {this.props.cartItems.length > 0 &&
+                      this.props.cartItems
+                        .reduce(
+                          (acc, item) =>
+                            acc +
+                            item.prices[this.props.selectedCurrency.i].amount *
+                              item.qty,
+                          0
+                        )
+                        .toFixed(2)}
+                  </span>
                 </p>
 
                 <div className="btn">

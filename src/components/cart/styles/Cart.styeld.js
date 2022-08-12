@@ -19,6 +19,7 @@ export const CartStyle = styled.div`
         font-style: normal;
         font-weight: 600;
         font-size: 30px;
+        font-family: "Raleway";
         line-height: 27px;
       }
       h3 {
@@ -26,6 +27,7 @@ export const CartStyle = styled.div`
         font-style: normal;
         font-weight: 400;
         font-size: 30px;
+        font-family: "Raleway";
         line-height: 27px;
         color: #1d1f22;
       }
@@ -35,6 +37,7 @@ export const CartStyle = styled.div`
         flex-direction: column;
 
         span {
+          font-family: "Raleway";
           font-style: normal;
           font-weight: 700;
           font-size: 24px;
@@ -50,15 +53,18 @@ export const CartStyle = styled.div`
           flex-direction: column;
           margin-top: -8px;
           h4 {
+            font-family: "Roboto Condensed";
             font-style: normal;
             font-weight: 700;
             font-size: 18px;
             color: #1d1f22;
+            text-transform: uppercase;
           }
           .size-box {
             display: flex;
             margin-top: -20px;
             .size-x {
+              font-family: "Source Sans Pro";
               border: 1px solid #1d1f22;
               width: 63px;
               height: 45px;
@@ -80,6 +86,8 @@ export const CartStyle = styled.div`
           margin-top: -8px;
 
           h4 {
+            text-transform: uppercase;
+            font-family: "Roboto Condensed";
             font-style: normal;
             font-weight: 700;
             font-size: 18px;
@@ -167,6 +175,7 @@ export const CartStyle = styled.div`
     h1 {
       font-weight: 700;
       font-size: 32px;
+      font-family: "Raleway";
       color: #1d1f22;
     }
     .order {
@@ -177,17 +186,33 @@ export const CartStyle = styled.div`
       width: 279px;
       margin-top: 15px;
       p {
-        font-weight: 500;
+        font-family: "Raleway";
+        font-weight: 400;
         font-size: 24px;
         color: #1d1f22;
         margin-bottom: -22px;
         span {
+          font-family: "Raleway";
+          font-weight: 700;
+          font-size: 24px;
+          color: #1d1f22;
+        }
+      }
+      .total {
+        font-family: "Raleway";
+        font-weight: 700;
+        font-size: 24px;
+        color: #1d1f22;
+        margin-bottom: -22px;
+        span {
+          font-family: "Raleway";
           font-weight: 700;
           font-size: 24px;
           color: #1d1f22;
         }
       }
       .order-btn {
+        font-family: "Raleway";
         display: flex;
         align-items: center;
         justify-content: center;
@@ -196,7 +221,7 @@ export const CartStyle = styled.div`
         height: 43px;
         background: #5ece7b;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 16px;
         line-height: 120%;
         text-transform: uppercase;
