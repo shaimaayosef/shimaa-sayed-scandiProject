@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const NavStyle = styled.div`
   nav {
+    z-index: 50;
+    position: fixed;
+    background-color: white;
     display: flex;
-    position: absolute;
     width: 100%;
     height: 80px;
     left: 0px;
@@ -15,7 +17,7 @@ export const NavStyle = styled.div`
       align-items: flex-start;
       height: 56px;
       margin-left: 80px;
-      margin-top: 10px;
+      margin-top: 15px;
       list-style: none;
       li {
         padding-left: 16px;
@@ -32,7 +34,7 @@ export const NavStyle = styled.div`
           text-decoration: none;
           font-family: "Raleway";
           font-style: normal;
-          font-weight: 450;
+          font-weight: 400;
           font-size: 16px;
           text-transform: uppercase;
           line-height: 120%;
@@ -41,34 +43,35 @@ export const NavStyle = styled.div`
       }
     }
     .nav-logo {
+      margin-top: 15px;
       align-self: center;
       width: 45px;
       height: 45px;
       flex: 1;
     }
     .cart-logo {
+      margin-top: 15px;
       flex: 1;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       margin-right: 110px;
-      .arrow {
-        width: 10px;
-        height: 5px;
-        cursor: pointer;
-      }
-      .dropbtn {
-        display: inline-block;
-        color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-      }
+
       .dropdown {
         display: inline-block;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
+        cursor: pointer;
         .dropbtn {
           font-size: 20px;
+          display: inline-block;
+          color: black;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+        .arrow {
+          width: 10px;
+          height: 5px;
         }
       }
       .dropdown-content {
@@ -77,7 +80,7 @@ export const NavStyle = styled.div`
         background-color: white;
         min-width: 90px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
+        z-index: 9;
         .options {
           width: 90px;
           font-size: large;

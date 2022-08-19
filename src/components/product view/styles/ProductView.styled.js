@@ -6,12 +6,15 @@ export const ProductViewStyle = styled.div`
     width: 1200px;
     height: 600px;
     left: 110px;
-    top: 120px;
+    top: 100px;
+    padding: 10px;
     display: flex;
+    margin-top: 20px;
     .product-images {
       display: flex;
       flex-direction: column;
       img {
+        object-fit: scale-down;
         width: 100px;
         height: 100px;
         margin-right: 60px;
@@ -21,7 +24,28 @@ export const ProductViewStyle = styled.div`
     }
     .Photo-Gallery {
       margin-right: 50px;
+      position: relative;
+      .outStock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 700px;
+        height: 600px;
+        background-color: rgba(255, 255, 255, 0.5);
+        p {
+          text-transform: uppercase;
+          font-weight: 400;
+          font-size: 24px;
+          line-height: 160%;
+          font-family: "Raleway";
+          color: #8d8f9a;
+        }
+      }
       img {
+        object-fit: scale-down;
         width: 700px;
         height: 600px;
       }
@@ -30,6 +54,7 @@ export const ProductViewStyle = styled.div`
       width: 520px;
       height: 595px;
       h2 {
+        margin: 16px 0px;
         font-family: "Raleway";
         color: #1d1f22;
         font-style: normal;
@@ -38,6 +63,7 @@ export const ProductViewStyle = styled.div`
         line-height: 27px;
       }
       h3 {
+        margin: 16px 0px;
         font-family: "Raleway";
         font-style: normal;
         font-weight: 400;
@@ -46,23 +72,21 @@ export const ProductViewStyle = styled.div`
         color: #1d1f22;
       }
       .size {
-        // border: #1d1f22 solid 1px;
         display: flex;
         flex-direction: column;
-        margin-top: -8px;
         h4 {
+          margin: 2px 0px;
           font-family: "Roboto Condensed";
           text-transform: uppercase;
           font-style: normal;
           font-weight: 700;
           font-size: 18px;
           color: #1d1f22;
-          margin-top: -5px;
+          /* margin-top: -5px; */
         }
         .size-box {
-          // border: #1d1f22 solid 1px;
+          margin-bottom: 16px;
           display: flex;
-          margin-top: -20px;
           .size-x {
             font-family: "Source Sans Pro";
             border: 1px solid #1d1f22;
@@ -85,18 +109,17 @@ export const ProductViewStyle = styled.div`
         flex-direction: column;
         margin-top: 10px;
         h4 {
+          margin: 2px 0px;
           font-family: "Roboto Condensed";
           text-transform: uppercase;
           font-style: normal;
           font-weight: 700;
           font-size: 18px;
           color: #1d1f22;
-          margin-top: -5px;
         }
         .color-box {
           font-family: "Source Sans Pro";
           display: flex;
-          margin-top: -15px;
           .color-x {
             border: #1d1f22 solid 1px;
             width: 32px;
@@ -113,6 +136,7 @@ export const ProductViewStyle = styled.div`
         display: flex;
         flex-direction: column;
         h4 {
+          margin: 2px 0px;
           text-transform: uppercase;
           font-family: "Roboto Condensed";
           font-style: normal;
@@ -125,7 +149,7 @@ export const ProductViewStyle = styled.div`
           font-weight: 700;
           font-size: 24px;
           color: #1d1f22;
-          margin-top: -10px;
+          font-family: "Raleway";
         }
       }
       .out {
@@ -163,6 +187,7 @@ export const ProductViewStyle = styled.div`
         cursor: pointer;
       }
       .descreption {
+        padding-bottom: 10px;
         font-style: normal;
         font-family: "Roboto";
         font-weight: 400;

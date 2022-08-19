@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { ModalStyle } from "./styles/Modal.styled";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { setShowModal, resetCart } from "../../store/cartSlice";
+import {
+  setShowModal,
+  resetCart,
+  setActiveCategory,
+} from "../../store/cartSlice";
 
 class Modal extends Component {
   render() {
@@ -21,6 +25,7 @@ class Modal extends Component {
                   this.props.setShowModal(false);
                   this.props.resetCart();
                   localStorage.setItem("cartItems", JSON.stringify([]));
+                  this.props.setActiveCategory(0);
                 }}
                 className="btn"
               >
@@ -36,6 +41,6 @@ class Modal extends Component {
 const mapStateToProps = (state) => ({
   showModal: state.cart.showModal,
 });
-const mapDispatchToProps = { setShowModal, resetCart };
+const mapDispatchToProps = { setShowModal, resetCart, setActiveCategory };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

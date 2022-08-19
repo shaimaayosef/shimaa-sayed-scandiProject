@@ -76,7 +76,6 @@ class Cart extends Component {
             >
               order
             </button>
-            <div></div>
           </div>
         </div>
       </CartStyle>

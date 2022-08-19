@@ -1,19 +1,34 @@
 import React, { Component } from "react";
 import ProductView from "../components/product view/ProductView";
 import { connect } from "react-redux";
+import { GET_PRODUCT } from "../queries/queries";
 
 class ProductDescriptionPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: null,
+    };
+  }
+  componentDidMount() {
+    this.props.client
+      .query({
+        query: GET_PRODUCT,
+        variables: { id: this.props.match.params.id },
+      })
+      .then((result) => this.setState({ product: result.data.product }));
+  }
   render() {
-    const product = this.props.categories[0].products.filter(
-      (p) => p.id === this.props.match.params.id
-    )[0];
-
     return (
       <div>
-        <ProductView
-          product={product}
-          selectedCurrency={this.props.selectedCurrency.i}
-        />
+        {this.state.product ? (
+          <ProductView
+            product={this.state.product}
+            selectedCurrency={this.props.selectedCurrency.i}
+          />
+        ) : (
+          <p>loading...</p>
+        )}
       </div>
     );
   }
@@ -21,6 +36,6 @@ class ProductDescriptionPage extends Component {
 const mapStateToProps = (state) => ({
   currency: state.currency.currency,
   selectedCurrency: state.currency.selectedCurrency,
-  categories: state.categories,
+  categories: state.categories.categories,
 });
 export default connect(mapStateToProps)(ProductDescriptionPage);

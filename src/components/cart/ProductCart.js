@@ -19,9 +19,6 @@ class ProductCart extends Component {
     this.state = {
       index: 0,
       src: this.props.item.gallery[0],
-      selectedColor: this.props.item.selectedColor,
-      selectedSize: this.props.item.selectedSize,
-      selectedCapasity: this.props.item.selectedCapasity,
     };
   }
   componentDidUpdate() {
@@ -47,18 +44,7 @@ class ProductCart extends Component {
       ? this.props.deletItem(this.props.id)
       : this.props.removeFromCart(this.props.id);
   }
-  addProToCart(attr, value) {
-    this.props.updateProduct({
-      ...this.props.item,
-      selectedSize:
-        attr === "selectedSize" ? value : this.props.item.selectedSize,
-      selectedColor:
-        attr === "selectedColor" ? value : this.props.item.selectedColor,
-      selectedCapasity:
-        attr === "selectedCapasity" ? value : this.props.item.selectedCapasity,
-      index: this.props.id,
-    });
-  }
+
   render() {
     return (
       <CartStyle>
@@ -77,54 +63,26 @@ class ProductCart extends Component {
             </div>
             <div className="attributes">
               {this.props.item.attributes
-                .filter((a) => a.id === "Size")
+                .filter((atr) => atr.id !== "Color")
                 .map((d, i) => (
                   <div className="size" key={i}>
-                    <h4>Size:</h4>
+                    <h4>{d.id}:</h4>
                     <div className="size-box">
                       {d.items.map((size, i) => (
                         <div
-                          className={`size-x ${
-                            this.props.item.selectedSize === i ? "selected" : ""
-                          }`}
-                          onClick={() => {
-                            this.setState((prevState) => ({
-                              ...prevState,
-                              selectedSize: i,
-                            }));
-                            this.addProToCart("selectedSize", i);
-                          }}
-                          key={i}
-                        >
-                          {size.value}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              {this.props.item.attributes
-                .filter((a) => a.id === "Capacity")
-                .map((d, i) => (
-                  <div className="size" key={i}>
-                    <h4>Capacity:</h4>
-                    <div className="size-box">
-                      {d.items.map((capacity, i) => (
-                        <div
                           key={i}
                           className={`size-x ${
-                            this.props.item.selectedCapasity === i
+                            this.props.item.selectedAttributes[d.id] === i
+                              ? "selected"
+                              : ""
+                          } ${
+                            this.props.item.selectedAttributes[d.id] ===
+                              undefined && i === 0
                               ? "selected"
                               : ""
                           }`}
-                          onClick={() => {
-                            this.setState((prevState) => ({
-                              ...prevState,
-                              selectedCapasity: i,
-                            }));
-                            this.addProToCart("selectedCapasity", i);
-                          }}
                         >
-                          {capacity.value}
+                          {size.value}
                         </div>
                       ))}
                     </div>
@@ -165,7 +123,7 @@ class ProductCart extends Component {
                 src={AddSvg}
                 alt="plus"
                 onClick={() => {
-                  this.props.updateCart(this.props.id);
+                  this.props.updateCart(this.props.item.key);
                 }}
               />
             </div>

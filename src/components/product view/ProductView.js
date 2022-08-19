@@ -10,9 +10,8 @@ class ProductView extends Component {
     super(props);
     this.state = {
       src: this.props.product.gallery[0],
+      selectedAttributes: {},
       selectedColor: 0,
-      selectedSize: 0,
-      selectedCapasity: 0,
       editorState: EditorState.createEmpty(),
     };
   }
@@ -23,13 +22,56 @@ class ProductView extends Component {
       src: src,
     }));
   }
+  getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+  isSameAttribute(oldProduct, newProduct) {
+    const oldProductAttrs = Object.values(oldProduct.selectedAttributes);
+    const newProdutAttrs = Object.values(newProduct.selectedAttributes);
+    return JSON.stringify(oldProductAttrs) === JSON.stringify(newProdutAttrs);
+  }
   addProToCart() {
-    this.props.addToCart({
+    const arr = [...this.props.product.attributes];
+    const updatedProduct = {
       ...this.props.product,
-      selectedSize: this.state.selectedSize,
-      selectedColor: this.state.selectedColor,
-      selectedCapasity: this.state.selectedCapasity,
-    });
+      selectedAttributes: {
+        ...this.props.product.selectedAttributes,
+        selectedColor: this.state.selectedColor,
+      },
+    };
+
+    for (let index in arr) {
+      updatedProduct.selectedAttributes[arr[index].id] =
+        this.state.selectedAttributes[arr[index].id] ?? 0;
+    }
+
+    const addedProducts = this.props.cartItems.filter(
+      (item) => item.id === updatedProduct.id
+    );
+
+    if (addedProducts.length > 0) {
+      let sameProduct;
+
+      for (let item of addedProducts) {
+        if (this.isSameAttribute(item, updatedProduct)) {
+          sameProduct = item.key;
+        }
+      }
+
+      if (sameProduct) {
+        this.props.updateCart(sameProduct);
+      } else {
+        this.props.addToCart({
+          ...updatedProduct,
+          key: this.getRndInteger(0, 100000),
+        });
+      }
+    } else {
+      this.props.addToCart({
+        ...updatedProduct,
+        key: this.getRndInteger(0, 100000),
+      });
+    }
   }
 
   onChange = (editorState) => {
@@ -47,8 +89,8 @@ class ProductView extends Component {
     );
     localStorage.setItem("cartItems", JSON.stringify(this.props.cartItems));
   }
+
   render() {
-    console.log(this.props.cartItems);
     return (
       <ProductViewStyle>
         <div className="ProductView">
@@ -62,57 +104,48 @@ class ProductView extends Component {
               />
             ))}
           </div>
+
           <div className="Photo-Gallery">
+            {this.props.product.inStock || (
+              <div className="outStock">
+                <p> out of stock</p>
+              </div>
+            )}
             <img src={this.state.src} alt={this.props.product.name} />
           </div>
           <div className="product-info">
             <h2>{this.props.product.brand}</h2>
             <h3>{this.props.product.name}</h3>
             {this.props.product.attributes
-              .filter((a) => a.id === "Size")
+              .filter((atr) => atr.id !== "Color")
               .map((d, i) => (
                 <div className="size" key={i}>
-                  <h4>Size:</h4>
+                  <h4>{d.id}:</h4>
                   <div className="size-box">
                     {d.items.map((size, i) => (
                       <div
                         key={i}
                         className={`size-x ${
-                          this.state.selectedSize === i ? "selected" : ""
+                          this.state.selectedAttributes[d.id] === i
+                            ? "selected"
+                            : ""
+                        } ${
+                          this.state.selectedAttributes[d.id] === undefined &&
+                          i === 0
+                            ? "selected"
+                            : ""
                         }`}
                         onClick={() => {
                           this.setState((prevState) => ({
                             ...prevState,
-                            selectedSize: i,
+                            selectedAttributes: {
+                              ...prevState.selectedAttributes,
+                              [d.id]: i,
+                            },
                           }));
                         }}
                       >
                         {size.value}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            {this.props.product.attributes
-              .filter((a) => a.id === "Capacity")
-              .map((d, i) => (
-                <div className="size" key={i}>
-                  <h4>Capacity:</h4>
-                  <div className="size-box">
-                    {d.items.map((capacity, i) => (
-                      <div
-                        key={i}
-                        className={`size-x ${
-                          this.state.selectedCapasity === i ? "selected" : ""
-                        }`}
-                        onClick={() => {
-                          this.setState((prevState) => ({
-                            ...prevState,
-                            selectedCapasity: i,
-                          }));
-                        }}
-                      >
-                        {capacity.value}
                       </div>
                     ))}
                   </div>
@@ -162,7 +195,7 @@ class ProductView extends Component {
             <div className="descreption">
               <Editor
                 editorState={this.state.editorState}
-                onChange={this.onChange}
+                // onChange={this.onChange}
               />
             </div>
           </div>
@@ -176,4 +209,4 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = { addToCart, updateCart, updateProduct };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductView); 
+export default connect(mapStateToProps, mapDispatchToProps)(ProductView);

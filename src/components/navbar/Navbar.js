@@ -7,26 +7,18 @@ import arrowUp from "../../Vectorup.svg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { ubdateCurrency } from "../../store/currencySlice";
-import { setShowCart } from "../../store/cartSlice";
+import {
+  setShowCart,
+  setShowCurrency,
+  setActiveCategory,
+} from "../../store/cartSlice";
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeItem: -1,
-      isOpen: true,
-    };
-  }
-
   openCurrencyList() {
-    this.setState((prevState) => ({
-      isOpen: !prevState.isOpen,
-    }));
+    this.props.setShowCurrency(!this.props.showCurrency);
   }
   handleItemClick(index) {
-    this.setState({
-      activeItem: index,
-    });
+    this.props.setActiveCategory(index);
   }
 
   render() {
@@ -38,7 +30,9 @@ class Navbar extends Component {
               this.props.categories.map((item, index) => (
                 <li
                   key={index}
-                  className={this.state.activeItem === index ? "active" : ""}
+                  className={
+                    this.props.activeCategory === index ? "active" : ""
+                  }
                   onClick={this.handleItemClick.bind(this, index)}
                 >
                   <Link to={"/" + item.name} className="nav-links">
@@ -48,10 +42,15 @@ class Navbar extends Component {
               ))}
           </ul>
           <Link to="/">
-            <img src={logotSvg} alt="nav logo" className="nav-logo" />
+            <img
+              src={logotSvg}
+              alt="nav logo"
+              className="nav-logo"
+              onClick={this.handleItemClick.bind(this, 0)}
+            />
           </Link>
           <div className="cart-logo">
-            <div className="dropdown">
+            <div className="dropdown" onClick={() => this.openCurrencyList()}>
               <p className="dropbtn">
                 {(this.props.currency.length > 0 &&
                   this.props.currency[this.props.selectedCurrency.i].symbol) ||
@@ -59,7 +58,7 @@ class Navbar extends Component {
               </p>
               <div
                 className={`dropdown-content ${
-                  this.state.isOpen ? "" : "displayed"
+                  this.props.showCurrency ? "" : "displayed"
                 }`}
               >
                 {this.props.currency.length > 0 &&
@@ -77,22 +76,12 @@ class Navbar extends Component {
                     </option>
                   ))}
               </div>
+              {this.props.showCurrency ? (
+                <img src={arrow} alt="arrow" className="arrow" />
+              ) : (
+                <img src={arrowUp} alt="arrow" className="arrow" />
+              )}
             </div>
-            {this.state.isOpen ? (
-              <img
-                src={arrow}
-                alt="arrow"
-                className="arrow"
-                onClick={() => this.openCurrencyList()}
-              />
-            ) : (
-              <img
-                src={arrowUp}
-                alt="arrow"
-                className="arrow"
-                onClick={() => this.openCurrencyList()}
-              />
-            )}
             <div className="cart">
               <div className="badge">
                 <span>
@@ -116,13 +105,18 @@ class Navbar extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  currency: state.currency.currency,
   selectedCurrency: state.currency.selectedCurrency,
-  categories: state.categories,
   showCart: state.cart.showCart,
   cartItems: state.cart.cartItems,
+  showCurrency: state.cart.showCurrency,
+  activeCategory: state.cart.activeCategory,
 });
 
-const mapDispatchToProps = { ubdateCurrency, setShowCart };
+const mapDispatchToProps = {
+  ubdateCurrency,
+  setShowCart,
+  setShowCurrency,
+  setActiveCategory,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

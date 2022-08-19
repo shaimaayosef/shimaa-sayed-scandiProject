@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CartItemStyel } from "./styles/cartOverlay.styled";
+import { CartItemStyle } from "./styles/cartOverlay.styled";
 import MinusSvg from "../../minus-squ.svg";
 import AddSvg from "../../plus-squ.svg";
 import {
@@ -11,14 +11,6 @@ import {
 import { connect } from "react-redux";
 
 class CartItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedColor: this.props.item.selectedColor,
-      selectedSize: this.props.item.selectedSize,
-      selectedCapasity: this.props.item.selectedCapasity,
-    };
-  }
   componentDidUpdate() {
     localStorage.setItem("cartItems", JSON.stringify(this.props.cartItems));
   }
@@ -27,21 +19,10 @@ class CartItem extends Component {
       ? this.props.deletItem(this.props.id)
       : this.props.removeFromCart(this.props.id);
   }
-  addProToCart(attr, value) {
-    this.props.updateProduct({
-      ...this.props.item,
-      selectedSize:
-        attr === "selectedSize" ? value : this.props.item.selectedSize,
-      selectedColor:
-        attr === "selectedColor" ? value : this.props.item.selectedColor,
-      selectedCapasity:
-        attr === "selectedCapasity" ? value : this.props.item.selectedCapasity,
-      index: this.props.id,
-    });
-  }
+
   render() {
     return (
-      <CartItemStyel>
+      <CartItemStyle>
         <div className="cart-item">
           <div className="product-info">
             <h2>{this.props.item.brand}</h2>
@@ -57,54 +38,26 @@ class CartItem extends Component {
             </div>
             <div className="attributes">
               {this.props.item.attributes
-                .filter((a) => a.id === "Size")
+                .filter((atr) => atr.id !== "Color")
                 .map((d, i) => (
                   <div className="size" key={i}>
-                    <h4>Size:</h4>
+                    <h4>{d.id}:</h4>
                     <div className="size-box">
                       {d.items.map((size, i) => (
                         <div
                           key={i}
                           className={`size-x ${
-                            this.props.item.selectedSize === i ? "selected" : ""
-                          }`}
-                          onClick={() => {
-                            this.setState((prevState) => ({
-                              ...prevState,
-                              selectedSize: i,
-                            }));
-                            this.addProToCart("selectedSize", i);
-                          }}
-                        >
-                          {size.value}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              {this.props.item.attributes
-                .filter((a) => a.id === "Capacity")
-                .map((d, i) => (
-                  <div className="size" key={i}>
-                    <h4>Capacity:</h4>
-                    <div className="size-box">
-                      {d.items.map((capacity, i) => (
-                        <div
-                          key={i}
-                          className={`size-x ${
-                            this.props.item.selectedCapasity === i
+                            this.props.item.selectedAttributes[d.id] === i
+                              ? "selected"
+                              : ""
+                          } ${
+                            this.props.item.selectedAttributes[d.id] ===
+                              undefined && i === 0
                               ? "selected"
                               : ""
                           }`}
-                          onClick={() => {
-                            this.setState((prevState) => ({
-                              ...prevState,
-                              selectedCapasity: i,
-                            }));
-                            this.addProToCart("selectedCapasity", i);
-                          }}
                         >
-                          {capacity.value}
+                          {size.value}
                         </div>
                       ))}
                     </div>
@@ -120,17 +73,11 @@ class CartItem extends Component {
                         <div
                           key={i}
                           className={`color-x ${
-                            this.props.item.selectedColor === i
+                            this.props.item.selectedAttributes.selectedColor ===
+                            i
                               ? "selected"
                               : ""
                           }`}
-                          onClick={() => {
-                            this.setState((prevState) => ({
-                              ...prevState,
-                              selectedColor: i,
-                            }));
-                            this.addProToCart("selectedColor", i);
-                          }}
                           style={{ backgroundColor: `${color.value}` }}
                         ></div>
                       ))}
@@ -145,7 +92,7 @@ class CartItem extends Component {
                 src={AddSvg}
                 alt="plus"
                 onClick={() => {
-                  this.props.updateCart(this.props.id);
+                  this.props.updateCart(this.props.item.key);
                 }}
               />
             </div>
@@ -166,7 +113,7 @@ class CartItem extends Component {
             />
           </div>
         </div>
-      </CartItemStyel>
+      </CartItemStyle>
     );
   }
 }

@@ -40,24 +40,6 @@ export const CardStyel = styled.div`
   }
   .pro-card {
     position: relative;
-    .outStock {
-      display: flex;
-      justify-content: center;
-      padding-top: 165px;
-      color: rgba(141, 143, 154, 1);
-      text-transform: uppercase;
-      font-weight: 400;
-      font-size: 24px;
-      line-height: 160%;
-      font-family: "Raleway";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      opacity: 0.5;
-    }
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -65,9 +47,39 @@ export const CardStyel = styled.div`
     width: 386px;
     height: 444px;
     cursor: pointer;
+
+    &:hover {
+      box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+      .cart-badge {
+        display: flex;
+      }
+    }
+    .outStock {
+      display: flex;
+      justify-content: center;
+      padding-top: 144px;
+      padding-left: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 386px;
+      height: 444px;
+      background-color: rgba(255, 255, 255, 0.5);
+
+      p {
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 160%;
+        font-family: "Raleway";
+        color: #8d8f9a;
+      }
+    }
+
     .product-img {
       width: 383px;
       height: 330px;
+      object-fit: scale-down;
     }
 
     .cart-badge {
@@ -78,7 +90,7 @@ export const CardStyel = styled.div`
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      display: flex;
+      display: none;
       align-items: center;
       text-align: center;
       /* margin-top: -26px;
