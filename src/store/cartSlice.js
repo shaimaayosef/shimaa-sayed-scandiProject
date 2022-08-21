@@ -39,10 +39,6 @@ export const cartSlice = createSlice({
         item.key === id ? { ...item, qty: item.qty++ } : item
       );
     },
-    updateProduct: (state, action) => {
-      const id = action.payload.index;
-      state.cartItems.splice(id, 1, action.payload);
-    },
     removeFromCart: (state, action) => {
       const id = action.payload;
       state.cartItems.map((item, i) =>
@@ -62,7 +58,6 @@ export const {
   updateCart,
   removeFromCart,
   deletItem,
-  updateProduct,
   setShowModal,
   resetCart,
   setShowCurrency,

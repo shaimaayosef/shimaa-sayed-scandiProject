@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import { CartItemStyle } from "./styles/cartOverlay.styled";
 import MinusSvg from "../../minus-squ.svg";
 import AddSvg from "../../plus-squ.svg";
-import {
-  removeFromCart,
-  updateCart,
-  deletItem,
-  updateProduct,
-} from "../../store/cartSlice";
+import { removeFromCart, updateCart, deletItem } from "../../store/cartSlice";
 import { connect } from "react-redux";
 
 class CartItem extends Component {
@@ -125,7 +120,6 @@ const mapDispatchToProps = {
   removeFromCart,
   updateCart,
   deletItem,
-  updateProduct,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

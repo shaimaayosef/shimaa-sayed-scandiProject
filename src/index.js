@@ -9,7 +9,9 @@ import { store } from "./store/store";
 
 export const client = new ApolloClient({
   uri: "http://localhost:4000/",
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    dataIdFromObject: (o) => (o._id ? `${o.__typename}:${o._id}` : null),
+  }),
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

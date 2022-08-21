@@ -1,7 +1,7 @@
 import { ProductViewStyle } from "./styles/ProductView.styled";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addToCart, updateCart, updateProduct } from "../../store/cartSlice";
+import { addToCart, updateCart } from "../../store/cartSlice";
 import { EditorState, Editor } from "draft-js";
 import { convertFromHTML } from "draft-convert";
 
@@ -207,6 +207,6 @@ class ProductView extends Component {
 const mapStateToProps = (state) => ({
   cartItems: state.cart.cartItems,
 });
-const mapDispatchToProps = { addToCart, updateCart, updateProduct };
+const mapDispatchToProps = { addToCart, updateCart };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductView);

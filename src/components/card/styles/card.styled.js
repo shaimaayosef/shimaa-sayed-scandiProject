@@ -4,7 +4,7 @@ export const CardStyel = styled.div`
   .CardContainer {
     margin-top: 10px;
     position: absolute;
-    width: 100%;
+    width: 90%;
     height: 100%;
     left: 0px;
     top: 80px;
@@ -25,7 +25,7 @@ export const CardStyel = styled.div`
         font-weight: 400;
         font-size: 42px;
         line-height: 160%;
-        text-transform: uppercase;
+        text-transform: capitalize;
       }
     }
     .cardsDiv {

@@ -5,12 +5,7 @@ import AfterArrowSvg from "../../Group 1418.svg";
 import MinusSvg from "../../minus-square.svg";
 import AddSvg from "../../plus-square.svg";
 import { Link } from "react-router-dom";
-import {
-  removeFromCart,
-  updateCart,
-  deletItem,
-  updateProduct,
-} from "../../store/cartSlice";
+import { removeFromCart, updateCart, deletItem } from "../../store/cartSlice";
 import { connect } from "react-redux";
 
 class ProductCart extends Component {
@@ -172,7 +167,6 @@ const mapDispatchToProps = {
   removeFromCart,
   updateCart,
   deletItem,
-  updateProduct,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCart);
