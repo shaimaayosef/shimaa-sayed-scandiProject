@@ -39,6 +39,7 @@ export const NavStyle = styled.div`
         color: black;
         &.active {
           color: #5ece7b;
+          font-weight: 600;
         }
       }
     }
