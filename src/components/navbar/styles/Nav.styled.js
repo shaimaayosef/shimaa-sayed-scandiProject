@@ -26,19 +26,19 @@ export const NavStyle = styled.div`
         cursor: pointer;
         &.active {
           border-bottom: solid 3px #5ece7b;
-          .nav-links {
-            color: #5ece7b;
-          }
         }
-        .nav-links {
-          text-decoration: none;
-          font-family: "Raleway";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          text-transform: uppercase;
-          line-height: 120%;
-          color: black;
+      }
+      .nav-links {
+        text-decoration: none;
+        font-family: "Raleway";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        text-transform: uppercase;
+        line-height: 120%;
+        color: black;
+        &.active {
+          color: #5ece7b;
         }
       }
     }

@@ -95,7 +95,7 @@ export const CardStyel = styled.div`
       text-align: center;
       /* margin-top: -26px;
       margin-left: 310px; */
-
+      user-select: none;
       .c-img {
         margin-left: 12px;
         img {

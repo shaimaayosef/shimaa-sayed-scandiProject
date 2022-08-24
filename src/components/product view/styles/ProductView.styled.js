@@ -38,7 +38,7 @@ export const ProductViewStyle = styled.div`
         p {
           text-transform: uppercase;
           font-weight: 400;
-          font-size: 24px;
+          font-size: 40px;
           line-height: 160%;
           font-family: "Raleway";
           color: #8d8f9a;

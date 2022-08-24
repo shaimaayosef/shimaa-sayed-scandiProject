@@ -95,14 +95,15 @@ class ProductView extends Component {
       <ProductViewStyle>
         <div className="ProductView">
           <div className="product-images">
-            {this.props.product.gallery.map((picture, i) => (
-              <img
-                src={picture}
-                alt={this.props.product.name}
-                key={i}
-                onClick={this.changeImg.bind(this, picture)}
-              />
-            ))}
+            {this.props.product.gallery.length > 1 &&
+              this.props.product.gallery.map((picture, i) => (
+                <img
+                  src={picture}
+                  alt={this.props.product.name}
+                  key={i}
+                  onClick={this.changeImg.bind(this, picture)}
+                />
+              ))}
           </div>
 
           <div className="Photo-Gallery">

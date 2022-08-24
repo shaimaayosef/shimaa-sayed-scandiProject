@@ -28,17 +28,22 @@ class Navbar extends Component {
           <ul className="catogeries">
             {this.props.categories.length > 0 &&
               this.props.categories.map((item, index) => (
-                <li
+                <Link
                   key={index}
-                  className={
+                  to={item.name === "all" ? "/" : "/" + item.name}
+                  className={`nav-links ${
                     this.props.activeCategory === index ? "active" : ""
-                  }
-                  onClick={this.handleItemClick.bind(this, index)}
+                  }`}
                 >
-                  <Link to={"/" + item.name} className="nav-links">
+                  <li
+                    className={
+                      this.props.activeCategory === index ? "active" : ""
+                    }
+                    onClick={this.handleItemClick.bind(this, index)}
+                  >
                     {item.name}
-                  </Link>
-                </li>
+                  </li>
+                </Link>
               ))}
           </ul>
           <Link to="/">

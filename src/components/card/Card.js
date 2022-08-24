@@ -79,13 +79,9 @@ class Card extends Component {
             />
           </Link>
           {this.props.product.inStock && (
-            <div className="cart-badge">
+            <div className="cart-badge" onClick={() => this.addProToCart()}>
               <div className="c-img">
-                <img
-                  src={ProCartSvg}
-                  alt="cart-logo"
-                  onClick={() => this.addProToCart()}
-                />
+                <img src={ProCartSvg} alt="cart-logo" />
               </div>
             </div>
           )}
