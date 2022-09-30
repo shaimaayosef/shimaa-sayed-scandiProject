@@ -53,7 +53,9 @@ class ProductCart extends Component {
                   this.props.item.prices[this.props.selectedCurrency].currency
                     .symbol
                 }
-                {this.props.item.prices[this.props.selectedCurrency].amount}
+                {this.props.item.prices[
+                  this.props.selectedCurrency
+                ].amount.toFixed(2)}
               </span>
             </div>
             <div className="attributes">

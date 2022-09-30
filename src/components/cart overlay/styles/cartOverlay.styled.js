@@ -124,11 +124,15 @@ export const CartItemStyle = styled.div`
           }
           .size-box {
             display: flex;
+            flex-wrap: wrap;
+            flex: 1;
+
             .size-x {
               border: 1px solid #1d1f22;
-              width: 42px;
+              width: fit-content;
               height: 24px;
               margin: 2px;
+              padding: 3px;
               display: flex;
               align-items: center;
               justify-content: center;
@@ -203,10 +207,26 @@ export const CartItemStyle = styled.div`
       align-items: center;
       height: auto;
       width: 121px;
+      position: relative;
       .product-img {
         object-fit: scale-down;
         width: 100%;
         height: 190px;
+      }
+      .changing-box {
+        position: absolute;
+        right: 9px;
+        bottom: 30px;
+        display: flex;
+        gap: 8px;
+        width: 28px;
+        height: 12px;
+        .prev {
+          cursor: pointer;
+        }
+        .after {
+          cursor: pointer;
+        }
       }
     }
   }

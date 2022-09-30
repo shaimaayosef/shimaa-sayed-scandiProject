@@ -4,8 +4,16 @@ import MinusSvg from "../../minus-squ.svg";
 import AddSvg from "../../plus-squ.svg";
 import { removeFromCart, updateCart, deletItem } from "../../store/cartSlice";
 import { connect } from "react-redux";
+import PrevArrowSvg from "../../Group 1417.svg";
+import AfterArrowSvg from "../../Group 1418.svg";
 
 class CartItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0,
+    };
+  }
   componentDidUpdate() {
     localStorage.setItem("cartItems", JSON.stringify(this.props.cartItems));
   }
@@ -13,6 +21,21 @@ class CartItem extends Component {
     this.props.item.qty === 1
       ? this.props.deletItem(this.props.id)
       : this.props.removeFromCart(this.props.id);
+  }
+  after() {
+    this.setState((prev) => ({
+      ...prev,
+      index:
+        prev.index === this.props.item.gallery.length - 1
+          ? prev.index
+          : prev.index + 1,
+    }));
+  }
+  previous() {
+    this.setState((prev) => ({
+      ...prev,
+      index: prev.index === 0 ? prev.index : prev.index - 1,
+    }));
   }
 
   render() {
@@ -28,7 +51,9 @@ class CartItem extends Component {
                   this.props.item.prices[this.props.selectedCurrency].currency
                     .symbol
                 }
-                {this.props.item.prices[this.props.selectedCurrency].amount}
+                {this.props.item.prices[
+                  this.props.selectedCurrency
+                ].amount.toFixed(2)}
               </span>
             </div>
             <div className="attributes">
@@ -102,10 +127,24 @@ class CartItem extends Component {
           </div>
           <div className="pro-img">
             <img
-              src={this.props.item.gallery[0]}
+              src={this.props.item.gallery[this.state.index]}
               alt={this.props.item.id}
               className="product-img"
             />
+            <div className="changing-box">
+              <img
+                src={PrevArrowSvg}
+                alt="prev"
+                className="prev"
+                onClick={() => this.previous()}
+              />
+              <img
+                src={AfterArrowSvg}
+                alt="after"
+                className="after"
+                onClick={() => this.after()}
+              />
+            </div>
           </div>
         </div>
       </CartItemStyle>

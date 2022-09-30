@@ -183,7 +183,9 @@ class ProductView extends Component {
                   this.props.product.prices[this.props.selectedCurrency]
                     .currency.symbol
                 }
-                {this.props.product.prices[this.props.selectedCurrency].amount}
+                {this.props.product.prices[
+                  this.props.selectedCurrency
+                ].amount.toFixed(2)}
               </span>
             </div>
             {this.props.product.inStock ? (

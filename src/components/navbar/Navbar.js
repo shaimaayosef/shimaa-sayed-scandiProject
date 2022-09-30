@@ -25,7 +25,10 @@ class Navbar extends Component {
     return (
       <NavStyle>
         <nav>
-          <ul className="catogeries">
+          <ul
+            className="catogeries"
+            onClick={() => this.props.setShowCart(false)}
+          >
             {this.props.categories.length > 0 &&
               this.props.categories.map((item, index) => (
                 <Link
@@ -51,7 +54,10 @@ class Navbar extends Component {
               src={logotSvg}
               alt="nav logo"
               className="nav-logo"
-              onClick={this.handleItemClick.bind(this, 0)}
+              onClick={() => {
+                this.handleItemClick.bind(this, 0);
+                this.props.setShowCart(false);
+              }}
             />
           </Link>
           <div className="cart-logo">

@@ -85,9 +85,14 @@ class Card extends Component {
               </div>
             </div>
           )}
-          <p className="product-name">{this.props.product.name}</p>
+
+          <p className="product-name">
+            {this.props.product.brand} {this.props.product.name}
+          </p>
           <h3 className="price">
-            {this.props.product.prices[this.props.selectedCurrency.i].amount}
+            {this.props.product.prices[
+              this.props.selectedCurrency.i
+            ].amount.toFixed(2)}
             {
               this.props.product.prices[this.props.selectedCurrency.i].currency
                 .symbol
